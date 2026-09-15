@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import Pagination1 from '../pagination/pagination-default';
+import Pagination1 from '../pagination-default';
 import { Table, TBody, Td, Th, THead, Tr } from '../table';
 import type { SortDir } from '../table';
 import { SortIcon } from '../sort';
