@@ -9,50 +9,421 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated.index'
+import { Route as AuthenticatedDailyProgressRouteImport } from './routes/_authenticated.daily-progress'
+import { Route as AuthenticatedMasterDataRouteImport } from './routes/_authenticated.master-data'
+import { Route as AuthenticatedRecordsRouteImport } from './routes/_authenticated.records'
+import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated.reports'
+import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated.users'
+import { Route as AuthenticatedDailyProgressIdRouteImport } from './routes/_authenticated.daily-progress_.$id'
+import { Route as AuthenticatedDailyProgressCreateRouteImport } from './routes/_authenticated.daily-progress_.create'
+import { Route as AuthenticatedMasterDataIndexRouteImport } from './routes/_authenticated.master-data.index'
+import { Route as AuthenticatedMasterDataCategoriesRouteImport } from './routes/_authenticated.master-data.categories'
+import { Route as AuthenticatedRecordsIndexRouteImport } from './routes/_authenticated.records.index'
+import { Route as AuthenticatedRecordsNewRouteImport } from './routes/_authenticated.records.new'
+import { Route as AuthenticatedRecordsIdRouteImport } from './routes/_authenticated.records_.$id'
+import { Route as AuthenticatedReportsIdRouteImport } from './routes/_authenticated.reports_.$id'
+import { Route as AuthenticatedRecordsRecordIdApprovalRouteImport } from './routes/_authenticated.records.$recordId.approval'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedDailyProgressRoute =
+  AuthenticatedDailyProgressRouteImport.update({
+    id: '/daily-progress',
+    path: '/daily-progress',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedMasterDataRoute = AuthenticatedMasterDataRouteImport.update({
+  id: '/master-data',
+  path: '/master-data',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedRecordsRoute = AuthenticatedRecordsRouteImport.update({
+  id: '/records',
+  path: '/records',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedDailyProgressIdRoute =
+  AuthenticatedDailyProgressIdRouteImport.update({
+    id: '/daily-progress_/$id',
+    path: '/daily-progress/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedDailyProgressCreateRoute =
+  AuthenticatedDailyProgressCreateRouteImport.update({
+    id: '/daily-progress_/create',
+    path: '/daily-progress/create',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedMasterDataIndexRoute =
+  AuthenticatedMasterDataIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedMasterDataRoute,
+  } as any)
+const AuthenticatedMasterDataCategoriesRoute =
+  AuthenticatedMasterDataCategoriesRouteImport.update({
+    id: '/categories',
+    path: '/categories',
+    getParentRoute: () => AuthenticatedMasterDataRoute,
+  } as any)
+const AuthenticatedRecordsIndexRoute =
+  AuthenticatedRecordsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedRecordsRoute,
+  } as any)
+const AuthenticatedRecordsNewRoute = AuthenticatedRecordsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AuthenticatedRecordsRoute,
+} as any)
+const AuthenticatedRecordsIdRoute = AuthenticatedRecordsIdRouteImport.update({
+  id: '/records_/$id',
+  path: '/records/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedReportsIdRoute = AuthenticatedReportsIdRouteImport.update({
+  id: '/reports_/$id',
+  path: '/reports/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedRecordsRecordIdApprovalRoute =
+  AuthenticatedRecordsRecordIdApprovalRouteImport.update({
+    id: '/$recordId/approval',
+    path: '/$recordId/approval',
+    getParentRoute: () => AuthenticatedRecordsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/login': typeof LoginRoute
+  '/daily-progress': typeof AuthenticatedDailyProgressRoute
+  '/master-data': typeof AuthenticatedMasterDataRouteWithChildren
+  '/records': typeof AuthenticatedRecordsRouteWithChildren
+  '/reports': typeof AuthenticatedReportsRoute
+  '/users': typeof AuthenticatedUsersRoute
+  '/daily-progress/$id': typeof AuthenticatedDailyProgressIdRoute
+  '/daily-progress/create': typeof AuthenticatedDailyProgressCreateRoute
+  '/master-data/categories': typeof AuthenticatedMasterDataCategoriesRoute
+  '/records/new': typeof AuthenticatedRecordsNewRoute
+  '/records/$id': typeof AuthenticatedRecordsIdRoute
+  '/reports/$id': typeof AuthenticatedReportsIdRoute
+  '/master-data/': typeof AuthenticatedMasterDataIndexRoute
+  '/records/': typeof AuthenticatedRecordsIndexRoute
+  '/records/$recordId/approval': typeof AuthenticatedRecordsRecordIdApprovalRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/daily-progress': typeof AuthenticatedDailyProgressRoute
+  '/reports': typeof AuthenticatedReportsRoute
+  '/users': typeof AuthenticatedUsersRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/daily-progress/$id': typeof AuthenticatedDailyProgressIdRoute
+  '/daily-progress/create': typeof AuthenticatedDailyProgressCreateRoute
+  '/master-data/categories': typeof AuthenticatedMasterDataCategoriesRoute
+  '/records/new': typeof AuthenticatedRecordsNewRoute
+  '/records/$id': typeof AuthenticatedRecordsIdRoute
+  '/reports/$id': typeof AuthenticatedReportsIdRoute
+  '/master-data': typeof AuthenticatedMasterDataIndexRoute
+  '/records': typeof AuthenticatedRecordsIndexRoute
+  '/records/$recordId/approval': typeof AuthenticatedRecordsRecordIdApprovalRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_authenticated/daily-progress': typeof AuthenticatedDailyProgressRoute
+  '/_authenticated/master-data': typeof AuthenticatedMasterDataRouteWithChildren
+  '/_authenticated/records': typeof AuthenticatedRecordsRouteWithChildren
+  '/_authenticated/reports': typeof AuthenticatedReportsRoute
+  '/_authenticated/users': typeof AuthenticatedUsersRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/daily-progress_/$id': typeof AuthenticatedDailyProgressIdRoute
+  '/_authenticated/daily-progress_/create': typeof AuthenticatedDailyProgressCreateRoute
+  '/_authenticated/master-data/categories': typeof AuthenticatedMasterDataCategoriesRoute
+  '/_authenticated/records/new': typeof AuthenticatedRecordsNewRoute
+  '/_authenticated/records_/$id': typeof AuthenticatedRecordsIdRoute
+  '/_authenticated/reports_/$id': typeof AuthenticatedReportsIdRoute
+  '/_authenticated/master-data/': typeof AuthenticatedMasterDataIndexRoute
+  '/_authenticated/records/': typeof AuthenticatedRecordsIndexRoute
+  '/_authenticated/records/$recordId/approval': typeof AuthenticatedRecordsRecordIdApprovalRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/daily-progress'
+    | '/master-data'
+    | '/records'
+    | '/reports'
+    | '/users'
+    | '/daily-progress/$id'
+    | '/daily-progress/create'
+    | '/master-data/categories'
+    | '/records/new'
+    | '/records/$id'
+    | '/reports/$id'
+    | '/master-data/'
+    | '/records/'
+    | '/records/$recordId/approval'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/login'
+    | '/daily-progress'
+    | '/reports'
+    | '/users'
+    | '/'
+    | '/daily-progress/$id'
+    | '/daily-progress/create'
+    | '/master-data/categories'
+    | '/records/new'
+    | '/records/$id'
+    | '/reports/$id'
+    | '/master-data'
+    | '/records'
+    | '/records/$recordId/approval'
+  id:
+    | '__root__'
+    | '/_authenticated'
+    | '/login'
+    | '/_authenticated/daily-progress'
+    | '/_authenticated/master-data'
+    | '/_authenticated/records'
+    | '/_authenticated/reports'
+    | '/_authenticated/users'
+    | '/_authenticated/'
+    | '/_authenticated/daily-progress_/$id'
+    | '/_authenticated/daily-progress_/create'
+    | '/_authenticated/master-data/categories'
+    | '/_authenticated/records/new'
+    | '/_authenticated/records_/$id'
+    | '/_authenticated/reports_/$id'
+    | '/_authenticated/master-data/'
+    | '/_authenticated/records/'
+    | '/_authenticated/records/$recordId/approval'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/daily-progress': {
+      id: '/_authenticated/daily-progress'
+      path: '/daily-progress'
+      fullPath: '/daily-progress'
+      preLoaderRoute: typeof AuthenticatedDailyProgressRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/master-data': {
+      id: '/_authenticated/master-data'
+      path: '/master-data'
+      fullPath: '/master-data'
+      preLoaderRoute: typeof AuthenticatedMasterDataRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/records': {
+      id: '/_authenticated/records'
+      path: '/records'
+      fullPath: '/records'
+      preLoaderRoute: typeof AuthenticatedRecordsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/users': {
+      id: '/_authenticated/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthenticatedUsersRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/daily-progress_/$id': {
+      id: '/_authenticated/daily-progress_/$id'
+      path: '/daily-progress/$id'
+      fullPath: '/daily-progress/$id'
+      preLoaderRoute: typeof AuthenticatedDailyProgressIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/daily-progress_/create': {
+      id: '/_authenticated/daily-progress_/create'
+      path: '/daily-progress/create'
+      fullPath: '/daily-progress/create'
+      preLoaderRoute: typeof AuthenticatedDailyProgressCreateRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/master-data/': {
+      id: '/_authenticated/master-data/'
+      path: '/'
+      fullPath: '/master-data/'
+      preLoaderRoute: typeof AuthenticatedMasterDataIndexRouteImport
+      parentRoute: typeof AuthenticatedMasterDataRoute
+    }
+    '/_authenticated/master-data/categories': {
+      id: '/_authenticated/master-data/categories'
+      path: '/categories'
+      fullPath: '/master-data/categories'
+      preLoaderRoute: typeof AuthenticatedMasterDataCategoriesRouteImport
+      parentRoute: typeof AuthenticatedMasterDataRoute
+    }
+    '/_authenticated/records/': {
+      id: '/_authenticated/records/'
+      path: '/'
+      fullPath: '/records/'
+      preLoaderRoute: typeof AuthenticatedRecordsIndexRouteImport
+      parentRoute: typeof AuthenticatedRecordsRoute
+    }
+    '/_authenticated/records/new': {
+      id: '/_authenticated/records/new'
+      path: '/new'
+      fullPath: '/records/new'
+      preLoaderRoute: typeof AuthenticatedRecordsNewRouteImport
+      parentRoute: typeof AuthenticatedRecordsRoute
+    }
+    '/_authenticated/records_/$id': {
+      id: '/_authenticated/records_/$id'
+      path: '/records/$id'
+      fullPath: '/records/$id'
+      preLoaderRoute: typeof AuthenticatedRecordsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/reports_/$id': {
+      id: '/_authenticated/reports_/$id'
+      path: '/reports/$id'
+      fullPath: '/reports/$id'
+      preLoaderRoute: typeof AuthenticatedReportsIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/records/$recordId/approval': {
+      id: '/_authenticated/records/$recordId/approval'
+      path: '/$recordId/approval'
+      fullPath: '/records/$recordId/approval'
+      preLoaderRoute: typeof AuthenticatedRecordsRecordIdApprovalRouteImport
+      parentRoute: typeof AuthenticatedRecordsRoute
     }
   }
 }
 
+interface AuthenticatedMasterDataRouteChildren {
+  AuthenticatedMasterDataCategoriesRoute: typeof AuthenticatedMasterDataCategoriesRoute
+  AuthenticatedMasterDataIndexRoute: typeof AuthenticatedMasterDataIndexRoute
+}
+
+const AuthenticatedMasterDataRouteChildren: AuthenticatedMasterDataRouteChildren =
+  {
+    AuthenticatedMasterDataCategoriesRoute:
+      AuthenticatedMasterDataCategoriesRoute,
+    AuthenticatedMasterDataIndexRoute: AuthenticatedMasterDataIndexRoute,
+  }
+
+const AuthenticatedMasterDataRouteWithChildren =
+  AuthenticatedMasterDataRoute._addFileChildren(
+    AuthenticatedMasterDataRouteChildren,
+  )
+
+interface AuthenticatedRecordsRouteChildren {
+  AuthenticatedRecordsNewRoute: typeof AuthenticatedRecordsNewRoute
+  AuthenticatedRecordsIndexRoute: typeof AuthenticatedRecordsIndexRoute
+  AuthenticatedRecordsRecordIdApprovalRoute: typeof AuthenticatedRecordsRecordIdApprovalRoute
+}
+
+const AuthenticatedRecordsRouteChildren: AuthenticatedRecordsRouteChildren = {
+  AuthenticatedRecordsNewRoute: AuthenticatedRecordsNewRoute,
+  AuthenticatedRecordsIndexRoute: AuthenticatedRecordsIndexRoute,
+  AuthenticatedRecordsRecordIdApprovalRoute:
+    AuthenticatedRecordsRecordIdApprovalRoute,
+}
+
+const AuthenticatedRecordsRouteWithChildren =
+  AuthenticatedRecordsRoute._addFileChildren(AuthenticatedRecordsRouteChildren)
+
+interface AuthenticatedRouteChildren {
+  AuthenticatedDailyProgressRoute: typeof AuthenticatedDailyProgressRoute
+  AuthenticatedMasterDataRoute: typeof AuthenticatedMasterDataRouteWithChildren
+  AuthenticatedRecordsRoute: typeof AuthenticatedRecordsRouteWithChildren
+  AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
+  AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedDailyProgressIdRoute: typeof AuthenticatedDailyProgressIdRoute
+  AuthenticatedDailyProgressCreateRoute: typeof AuthenticatedDailyProgressCreateRoute
+  AuthenticatedRecordsIdRoute: typeof AuthenticatedRecordsIdRoute
+  AuthenticatedReportsIdRoute: typeof AuthenticatedReportsIdRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedDailyProgressRoute: AuthenticatedDailyProgressRoute,
+  AuthenticatedMasterDataRoute: AuthenticatedMasterDataRouteWithChildren,
+  AuthenticatedRecordsRoute: AuthenticatedRecordsRouteWithChildren,
+  AuthenticatedReportsRoute: AuthenticatedReportsRoute,
+  AuthenticatedUsersRoute: AuthenticatedUsersRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedDailyProgressIdRoute: AuthenticatedDailyProgressIdRoute,
+  AuthenticatedDailyProgressCreateRoute: AuthenticatedDailyProgressCreateRoute,
+  AuthenticatedRecordsIdRoute: AuthenticatedRecordsIdRoute,
+  AuthenticatedReportsIdRoute: AuthenticatedReportsIdRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
