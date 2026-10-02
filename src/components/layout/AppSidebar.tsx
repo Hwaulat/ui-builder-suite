@@ -42,14 +42,16 @@ const coreFunctions = [
 ];
 
 const setupSystem = [
-  // {
-  //   title: "Master Data",
-  //   url: "/master-data",
-  //   icon: Database,
-  //   children: [
-  //     { label: "Categories", path: "/master-data/categories" }
-  //   ]
-  // },
+  {
+    title: "Master Data",
+    url: "/master-data",
+    icon: Database,
+    children: [
+      { label: "Part", path: "/master-data/part", icon: ListFilter },
+      { label: "Equipment", path: "/master-data/equipment", icon: CheckSquare },
+      { label: "Checksheet", path: "/master-data/checksheet", icon: FileText }
+    ]
+  },
   {
     title: "Users Management",
     url: "/users",

@@ -8,6 +8,7 @@ import { cn } from "@/utils/cn";
 const buttonVariants = cva(
   [
     "cursor-pointer inline-flex items-center justify-center gap-2 px-4 py-2 font-medium text-sm whitespace-nowrap rounded-lg transition-all disabled:pointer-events-none disabled:border-0 disabled:bg-gray-100 disabled:text-gray-700 disabled:select-none",
+
     "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-6 shrink-0 [&_svg]:shrink-0",
     "outline-none focus-visible:border-ring focus-visible:ring-black focus-visible:ring-[1.5px]",
     "aria-invalid:ring-red-500/20 aria-invalid:border-red-500",
@@ -78,11 +79,11 @@ const buttonVariants = cva(
           "bg-primary-50 text-primary-500 dark:bg-blue-900/20 dark:text-blue-400",
         icon: "p-2 rounded-lg border border-gray-300 hover:bg-gray-100 hover:border-gray-300 text-gray-400 data-[state=open]:bg-gray-100 data-[state=open]:border-gray-300 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:text-gray-400 dark:data-[state=open]:bg-gray-700 dark:data-[state=open]:border-gray-600",
         iconView:
-          "!w-8 !h-8 flex items-center justify-center rounded-[10px] border border-slate-200 dark:border-gray-600 hover:border-[#1F5AA6] hover:bg-[#EFF4FB] dark:hover:bg-[#1F5AA6]/20 text-slate-400 dark:text-gray-600 hover:text-[#1F5AA6] dark:hover:text-[#1F5AA6]/20 transition-all !p-0 [&_svg]:!w-[17px] [&_svg]:!h-[17px] [&_svg]:!stroke-[1.75]",
+          "w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-600 hover:border-[#1F5AA6] hover:bg-[#EFF4FB] dark:hover:bg-[#1F5AA6]/20 text-gray-200 dark:text-gray-600 hover:text-[#1F5AA6] dark:hover:text-[#1F5AA6]/20 text-gray-400 hover:text-[#1F5AA6] transition-all",
         iconDelete:
-          "!w-8 !h-8 flex items-center justify-center rounded-[10px] border border-slate-200 dark:border-gray-600 hover:border-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 text-slate-400 hover:text-red-600 transition-all !p-0 [&_svg]:!w-[17px] [&_svg]:!h-[17px] [&_svg]:!stroke-[1.75]",
+          "w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-600 hover:border-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-400 hover:text-red-600 transition-all",
         iconEdit:
-          "!w-8 !h-8 flex items-center justify-center rounded-[10px] border border-slate-200 dark:border-gray-600 hover:border-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 text-slate-400 hover:text-orange-600 transition-all !p-0 [&_svg]:!w-[17px] [&_svg]:!h-[17px] [&_svg]:!stroke-[1.75]",
+          "w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-600 hover:border-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 text-gray-400 hover:text-orange-600 transition-all",
       },
       intent: {
         edit: "hover:border-orange-500 hover:bg-orange-50  hover:text-orange-500  hover:shadow-none active:bg-orange-50 dark:hover:border-orange-500 dark:hover:bg-orange-100 dark:hover:text-orange-500 dark:active:bg-orange-100",
@@ -111,13 +112,11 @@ const buttonVariants = cva(
         iconSm: "[&_svg:not([class*='size-'])]:size-5",
         iconMd: "[&_svg:not([class*='size-'])]:size-6",
         iconLg: "[&_svg:not([class*='size-'])]:size-8",
-        icon: "h-10 w-10", // Added standard icon size for compatibility
-        default: "h-10 px-4 py-2" // Added standard default size for compatibility
       },
     },
     defaultVariants: {
       variant: "primary",
-      size: "default",
+      size: "md",
     },
   },
 );

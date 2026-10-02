@@ -9,7 +9,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Users, User, Shield, UserCheck, UserX, Plus, Eye, RefreshCw, Edit2, Trash2, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { Users, User, Shield, UserCheck, UserX, Plus, Eye, RefreshCw, Edit2, Trash2, ChevronDown } from "lucide-react";
+import PaginationDefault from "@/components/ui/pagination";
 
 export const Route = createFileRoute("/_authenticated/users")({
   component: UsersManagementPage,
@@ -205,10 +206,10 @@ function UsersManagementPage() {
                     <TableRow key={row.id} className="border-b border-slate-50 dark:border-slate-700/30 hover:bg-slate-50/50 dark:hover:bg-slate-700/20 group transition-colors">
                       <TableCell className="py-3 px-4">
                         <div className="flex items-center justify-center gap-1.5">
-                          <Button variant="iconView" title="View"><Eye /></Button>
+                          <Button variant="icon" title="View" className="!w-8 !h-8 !p-0 dark:border-slate-700 dark:hover:bg-slate-700"><Eye className="!w-[17px] !h-[17px]" /></Button>
                           <Button variant="icon" title="Refresh" className="!w-8 !h-8 !p-0 dark:border-slate-700 dark:hover:bg-slate-700"><RefreshCw className="!w-[17px] !h-[17px]" /></Button>
-                          <Button variant="iconEdit" title="Edit"><Edit2 /></Button>
-                          <Button variant="iconDelete" title="Delete"><Trash2 /></Button>
+                          <Button variant="icon" title="Edit" className="!w-8 !h-8 !p-0 dark:border-slate-700 dark:hover:bg-slate-700"><Edit2 className="!w-[17px] !h-[17px]" /></Button>
+                          <Button variant="icon" title="Delete" className="!w-8 !h-8 !p-0 dark:border-slate-700 dark:hover:bg-slate-700"><Trash2 className="!w-[17px] !h-[17px]" /></Button>
                         </div>
                       </TableCell>
                       <TableCell>
@@ -247,58 +248,15 @@ function UsersManagementPage() {
             </div>
 
             {/* Footer Pagination */}
-            <div className="p-4 border-t border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white dark:bg-slate-800 shrink-0">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                  <span>Rows per page:</span>
-                  <Select value={itemsPerPage.toString()} onValueChange={(val) => { setItemsPerPage(Number(val)); setCurrentPage(1); }}>
-                    <SelectTrigger className="w-16 h-8 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 px-2 text-center text-xs">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="dark:bg-slate-800 dark:border-slate-700">
-                      <SelectItem value="5">5</SelectItem>
-                      <SelectItem value="10">10</SelectItem>
-                      <SelectItem value="20">20</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <span className="text-sm text-slate-500 dark:text-slate-400">
-                  {filteredUsers.length === 0 ? '0-0 of 0' : `${(currentPage - 1) * itemsPerPage + 1}-${Math.min(currentPage * itemsPerPage, filteredUsers.length)} of ${filteredUsers.length}`}
-                </span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Button 
-                  variant="outline" 
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                  className="w-8 h-8 p-0 rounded border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 disabled:opacity-50"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </Button>
-                {Array.from({ length: totalPages || 1 }).map((_, i) => (
-                  <Button 
-                    key={i} 
-                    variant={currentPage === i + 1 ? "default" : "outline"} 
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`w-8 h-8 p-0 rounded ${
-                      currentPage === i + 1 
-                        ? "bg-blue-600 text-white hover:bg-blue-700" 
-                        : "border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 dark:bg-slate-800"
-                    }`}
-                  >
-                    {i + 1}
-                  </Button>
-                ))}
-                <Button 
-                  variant="outline" 
-                  onClick={() => setCurrentPage(p => Math.min(totalPages || 1, p + 1))}
-                  disabled={currentPage === totalPages || totalPages === 0}
-                  className="w-8 h-8 p-0 rounded border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 disabled:opacity-50"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
+            <PaginationDefault 
+              currentPage={currentPage}
+              totalPages={totalPages}
+              rowsPerPage={itemsPerPage}
+              totalItems={filteredUsers.length}
+              onPageChange={setCurrentPage}
+              onRowsPerPageChange={(val) => { setItemsPerPage(val); setCurrentPage(1); }}
+              spacing="gap-4"
+            />
           </Card>
         </div>
       )}

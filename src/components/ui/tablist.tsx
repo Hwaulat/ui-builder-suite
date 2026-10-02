@@ -36,6 +36,8 @@ export interface TabsProps {
   defaultValue?: string;
   value?: string;
   onValueChange?: (value: string) => void;
+  leftHeader?: ReactNode;
+  rightHeader?: ReactNode;
 }
 
 interface VariantConfig {
@@ -109,6 +111,8 @@ export function Tabs({
   onValueChange,
   fullWidth = false,
   className,
+  leftHeader,
+  rightHeader,
 }: TabsProps) {
   const { listWrapper, list, triggerBase, triggerActive, triggerSize } =
     variants[variant];
@@ -164,7 +168,11 @@ export function Tabs({
       orientation={orientation}
       className={cn('overflow-auto lg:overflow-hidden', className)}
     >
-      {listWrapper ? <div className={listWrapper}>{tabsList}</div> : tabsList}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full">
+        {leftHeader && <div>{leftHeader}</div>}
+        {listWrapper ? <div className={listWrapper}>{tabsList}</div> : tabsList}
+        {rightHeader && <div>{rightHeader}</div>}
+      </div>
 
       {items.map((item) => (
         <TabsContent key={item.value} value={item.value} className="mt-4">

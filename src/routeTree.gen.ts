@@ -21,6 +21,9 @@ import { Route as AuthenticatedDailyProgressIdRouteImport } from './routes/_auth
 import { Route as AuthenticatedDailyProgressCreateRouteImport } from './routes/_authenticated.daily-progress_.create'
 import { Route as AuthenticatedMasterDataIndexRouteImport } from './routes/_authenticated.master-data.index'
 import { Route as AuthenticatedMasterDataCategoriesRouteImport } from './routes/_authenticated.master-data.categories'
+import { Route as AuthenticatedMasterDataChecksheetRouteImport } from './routes/_authenticated.master-data.checksheet'
+import { Route as AuthenticatedMasterDataEquipmentRouteImport } from './routes/_authenticated.master-data.equipment'
+import { Route as AuthenticatedMasterDataPartRouteImport } from './routes/_authenticated.master-data.part'
 import { Route as AuthenticatedRecordsIndexRouteImport } from './routes/_authenticated.records.index'
 import { Route as AuthenticatedRecordsNewRouteImport } from './routes/_authenticated.records.new'
 import { Route as AuthenticatedRecordsIdRouteImport } from './routes/_authenticated.records_.$id'
@@ -91,6 +94,24 @@ const AuthenticatedMasterDataCategoriesRoute =
     path: '/categories',
     getParentRoute: () => AuthenticatedMasterDataRoute,
   } as any)
+const AuthenticatedMasterDataChecksheetRoute =
+  AuthenticatedMasterDataChecksheetRouteImport.update({
+    id: '/checksheet',
+    path: '/checksheet',
+    getParentRoute: () => AuthenticatedMasterDataRoute,
+  } as any)
+const AuthenticatedMasterDataEquipmentRoute =
+  AuthenticatedMasterDataEquipmentRouteImport.update({
+    id: '/equipment',
+    path: '/equipment',
+    getParentRoute: () => AuthenticatedMasterDataRoute,
+  } as any)
+const AuthenticatedMasterDataPartRoute =
+  AuthenticatedMasterDataPartRouteImport.update({
+    id: '/part',
+    path: '/part',
+    getParentRoute: () => AuthenticatedMasterDataRoute,
+  } as any)
 const AuthenticatedRecordsIndexRoute =
   AuthenticatedRecordsIndexRouteImport.update({
     id: '/',
@@ -130,6 +151,9 @@ export interface FileRoutesByFullPath {
   '/daily-progress/$id': typeof AuthenticatedDailyProgressIdRoute
   '/daily-progress/create': typeof AuthenticatedDailyProgressCreateRoute
   '/master-data/categories': typeof AuthenticatedMasterDataCategoriesRoute
+  '/master-data/checksheet': typeof AuthenticatedMasterDataChecksheetRoute
+  '/master-data/equipment': typeof AuthenticatedMasterDataEquipmentRoute
+  '/master-data/part': typeof AuthenticatedMasterDataPartRoute
   '/records/new': typeof AuthenticatedRecordsNewRoute
   '/records/$id': typeof AuthenticatedRecordsIdRoute
   '/reports/$id': typeof AuthenticatedReportsIdRoute
@@ -146,6 +170,9 @@ export interface FileRoutesByTo {
   '/daily-progress/$id': typeof AuthenticatedDailyProgressIdRoute
   '/daily-progress/create': typeof AuthenticatedDailyProgressCreateRoute
   '/master-data/categories': typeof AuthenticatedMasterDataCategoriesRoute
+  '/master-data/checksheet': typeof AuthenticatedMasterDataChecksheetRoute
+  '/master-data/equipment': typeof AuthenticatedMasterDataEquipmentRoute
+  '/master-data/part': typeof AuthenticatedMasterDataPartRoute
   '/records/new': typeof AuthenticatedRecordsNewRoute
   '/records/$id': typeof AuthenticatedRecordsIdRoute
   '/reports/$id': typeof AuthenticatedReportsIdRoute
@@ -166,6 +193,9 @@ export interface FileRoutesById {
   '/_authenticated/daily-progress_/$id': typeof AuthenticatedDailyProgressIdRoute
   '/_authenticated/daily-progress_/create': typeof AuthenticatedDailyProgressCreateRoute
   '/_authenticated/master-data/categories': typeof AuthenticatedMasterDataCategoriesRoute
+  '/_authenticated/master-data/checksheet': typeof AuthenticatedMasterDataChecksheetRoute
+  '/_authenticated/master-data/equipment': typeof AuthenticatedMasterDataEquipmentRoute
+  '/_authenticated/master-data/part': typeof AuthenticatedMasterDataPartRoute
   '/_authenticated/records/new': typeof AuthenticatedRecordsNewRoute
   '/_authenticated/records_/$id': typeof AuthenticatedRecordsIdRoute
   '/_authenticated/reports_/$id': typeof AuthenticatedReportsIdRoute
@@ -186,6 +216,9 @@ export interface FileRouteTypes {
     | '/daily-progress/$id'
     | '/daily-progress/create'
     | '/master-data/categories'
+    | '/master-data/checksheet'
+    | '/master-data/equipment'
+    | '/master-data/part'
     | '/records/new'
     | '/records/$id'
     | '/reports/$id'
@@ -202,6 +235,9 @@ export interface FileRouteTypes {
     | '/daily-progress/$id'
     | '/daily-progress/create'
     | '/master-data/categories'
+    | '/master-data/checksheet'
+    | '/master-data/equipment'
+    | '/master-data/part'
     | '/records/new'
     | '/records/$id'
     | '/reports/$id'
@@ -221,6 +257,9 @@ export interface FileRouteTypes {
     | '/_authenticated/daily-progress_/$id'
     | '/_authenticated/daily-progress_/create'
     | '/_authenticated/master-data/categories'
+    | '/_authenticated/master-data/checksheet'
+    | '/_authenticated/master-data/equipment'
+    | '/_authenticated/master-data/part'
     | '/_authenticated/records/new'
     | '/_authenticated/records_/$id'
     | '/_authenticated/reports_/$id'
@@ -320,6 +359,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMasterDataCategoriesRouteImport
       parentRoute: typeof AuthenticatedMasterDataRoute
     }
+    '/_authenticated/master-data/checksheet': {
+      id: '/_authenticated/master-data/checksheet'
+      path: '/checksheet'
+      fullPath: '/master-data/checksheet'
+      preLoaderRoute: typeof AuthenticatedMasterDataChecksheetRouteImport
+      parentRoute: typeof AuthenticatedMasterDataRoute
+    }
+    '/_authenticated/master-data/equipment': {
+      id: '/_authenticated/master-data/equipment'
+      path: '/equipment'
+      fullPath: '/master-data/equipment'
+      preLoaderRoute: typeof AuthenticatedMasterDataEquipmentRouteImport
+      parentRoute: typeof AuthenticatedMasterDataRoute
+    }
+    '/_authenticated/master-data/part': {
+      id: '/_authenticated/master-data/part'
+      path: '/part'
+      fullPath: '/master-data/part'
+      preLoaderRoute: typeof AuthenticatedMasterDataPartRouteImport
+      parentRoute: typeof AuthenticatedMasterDataRoute
+    }
     '/_authenticated/records/': {
       id: '/_authenticated/records/'
       path: '/'
@@ -360,6 +420,9 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedMasterDataRouteChildren {
   AuthenticatedMasterDataCategoriesRoute: typeof AuthenticatedMasterDataCategoriesRoute
+  AuthenticatedMasterDataChecksheetRoute: typeof AuthenticatedMasterDataChecksheetRoute
+  AuthenticatedMasterDataEquipmentRoute: typeof AuthenticatedMasterDataEquipmentRoute
+  AuthenticatedMasterDataPartRoute: typeof AuthenticatedMasterDataPartRoute
   AuthenticatedMasterDataIndexRoute: typeof AuthenticatedMasterDataIndexRoute
 }
 
@@ -367,6 +430,11 @@ const AuthenticatedMasterDataRouteChildren: AuthenticatedMasterDataRouteChildren
   {
     AuthenticatedMasterDataCategoriesRoute:
       AuthenticatedMasterDataCategoriesRoute,
+    AuthenticatedMasterDataChecksheetRoute:
+      AuthenticatedMasterDataChecksheetRoute,
+    AuthenticatedMasterDataEquipmentRoute:
+      AuthenticatedMasterDataEquipmentRoute,
+    AuthenticatedMasterDataPartRoute: AuthenticatedMasterDataPartRoute,
     AuthenticatedMasterDataIndexRoute: AuthenticatedMasterDataIndexRoute,
   }
 
