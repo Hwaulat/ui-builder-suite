@@ -1,16 +1,16 @@
-import * as React from "react"
-import { cn } from "@/utils/cn"
-import { SortIcon } from "./sort"
+import * as React from "react";
+import { cn } from "@/utils/cn";
+import { SortIcon } from "./sort";
 
-export type SortDir = 'asc' | 'desc'
+export type SortDir = "asc" | "desc";
 
-const Table = ({ 
-  className, 
+const Table = ({
+  className,
   containerClassName,
-  ...props 
+  ...props
 }: React.ComponentProps<"table"> & {
-  className?: string
-  containerClassName?: string
+  className?: string;
+  containerClassName?: string;
 }) => {
   return (
     <div
@@ -19,12 +19,15 @@ const Table = ({
     >
       <table
         data-slot="table"
-        className={cn("w-full border-collapse border-spacing-0 [&_*]:border-gray-100 min-w-0 max-w-none rounded-lg caption-bottom", className)}
+        className={cn(
+          "w-full border-collapse border-spacing-0 [&_*]:border-gray-100 min-w-0 max-w-none rounded-lg caption-bottom",
+          className,
+        )}
         {...props}
       />
     </div>
   );
-}
+};
 
 const THead = ({ className, ...props }: React.ComponentProps<"thead">) => {
   return (
@@ -34,17 +37,11 @@ const THead = ({ className, ...props }: React.ComponentProps<"thead">) => {
       {...props}
     />
   );
-}
+};
 
 const TBody = ({ className, ...props }: React.ComponentProps<"tbody">) => {
-  return (
-    <tbody
-      data-slot="table-body"
-      className={cn(className)}
-      {...props}
-    />
-  );
-}
+  return <tbody data-slot="table-body" className={cn(className)} {...props} />;
+};
 
 const TFoot = ({ className, ...props }: React.ComponentProps<"tfoot">) => {
   return (
@@ -54,25 +51,28 @@ const TFoot = ({ className, ...props }: React.ComponentProps<"tfoot">) => {
       {...props}
     />
   );
-}
+};
 
 const Tr = ({ className, ...props }: React.ComponentProps<"tr">) => {
   return (
     <tr
       data-slot="table-row"
-      className={cn("px-2 border-b transition-colors data-[state=selected]:bg-neutral-3 hover:bg-neutral-3", className)}
+      className={cn(
+        "px-2 border-b transition-colors data-[state=selected]:bg-neutral-3 hover:bg-neutral-3",
+        className,
+      )}
       {...props}
     />
   );
-}
+};
 
 type ThProps = React.ComponentProps<"th"> & {
-  sortable?: boolean
-  column?: string
-  sortKey?: string
-  sortDir?: SortDir
-  onSort?: (key: string) => void
-}
+  sortable?: boolean;
+  column?: string;
+  sortKey?: string;
+  sortDir?: SortDir;
+  onSort?: (key: string) => void;
+};
 
 const Th = ({
   className,
@@ -84,7 +84,7 @@ const Th = ({
   children,
   ...props
 }: ThProps) => {
-  const isSortable = sortable && column
+  const isSortable = sortable && column;
 
   return (
     <th
@@ -92,7 +92,7 @@ const Th = ({
       className={cn(
         "h-12 px-2 font-semibold text-sm text-left align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
         isSortable && "cursor-pointer select-none hover:text-gray-700 dark:hover:text-gray-200",
-        className
+        className,
       )}
       onClick={isSortable ? () => onSort?.(column) : undefined}
       {...props}
@@ -100,28 +100,27 @@ const Th = ({
       {isSortable ? (
         <div className="flex items-center">
           {children}
-          <SortIcon
-            column={column}
-            sortKey={sortKey ?? ''}
-            sortDir={sortDir ?? 'asc'}
-          />
+          <SortIcon column={column} sortKey={sortKey ?? ""} sortDir={sortDir ?? "asc"} />
         </div>
       ) : (
         children
       )}
     </th>
   );
-}
+};
 
 const Td = ({ className, ...props }: React.ComponentProps<"td">) => {
   return (
     <td
       data-slot="table-cell"
-      className={cn("px-2 py-3 align-middle text-sm whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]", className)}
+      className={cn(
+        "px-2 py-3 align-middle text-sm whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        className,
+      )}
       {...props}
     />
   );
-}
+};
 
 const Tc = ({ className, ...props }: React.ComponentProps<"caption">) => {
   return (
@@ -131,15 +130,6 @@ const Tc = ({ className, ...props }: React.ComponentProps<"caption">) => {
       {...props}
     />
   );
-}
+};
 
-export {
-  Table,
-  THead,
-  TBody,
-  TFoot,
-  Th,
-  Tr,
-  Td,
-  Tc,
-}
+export { Table, THead, TBody, TFoot, Th, Tr, Td, Tc };

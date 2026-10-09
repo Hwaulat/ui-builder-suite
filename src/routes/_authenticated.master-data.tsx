@@ -5,7 +5,5 @@ export const Route = createFileRoute("/_authenticated/master-data")({
 });
 
 function MasterDataLayout() {
-  return (
-    <Outlet />
-  );
+  return <Outlet />;
 }

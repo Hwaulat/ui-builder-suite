@@ -2,7 +2,14 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -43,19 +50,17 @@ function LoginPage() {
       <Card className="w-full max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold tracking-tight">Login</CardTitle>
-          <CardDescription>
-            Masukkan email dan password untuk masuk ke akun Anda
-          </CardDescription>
+          <CardDescription>Masukkan email dan password untuk masuk ke akun Anda</CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input 
-                id="email" 
-                type="email" 
-                placeholder="admin@example.com" 
-                required 
+              <Input
+                id="email"
+                type="email"
+                placeholder="admin@example.com"
+                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -64,10 +69,10 @@ function LoginPage() {
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
               </div>
-              <Input 
-                id="password" 
-                type="password" 
-                required 
+              <Input
+                id="password"
+                type="password"
+                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

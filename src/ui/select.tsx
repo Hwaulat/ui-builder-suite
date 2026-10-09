@@ -1,10 +1,6 @@
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "lucide-react";
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { cn } from "@/utils/cn";
 
 const Select = SelectPrimitive.Root;
@@ -44,10 +40,7 @@ const SelectScrollUpButton = React.forwardRef<
   <SelectPrimitive.ScrollUpButton
     ref={ref}
     data-slot="select-scroll-up-button"
-    className={cn(
-      "flex cursor-default items-center justify-center py-1",
-      className,
-    )}
+    className={cn("flex cursor-default items-center justify-center py-1", className)}
     {...props}
   >
     <ChevronUpIcon className="size-4" />
@@ -62,17 +55,13 @@ const SelectScrollDownButton = React.forwardRef<
   <SelectPrimitive.ScrollDownButton
     ref={ref}
     data-slot="select-scroll-down-button"
-    className={cn(
-      "flex cursor-default items-center justify-center py-1",
-      className,
-    )}
+    className={cn("flex cursor-default items-center justify-center py-1", className)}
     {...props}
   >
     <ChevronDownIcon className="size-4" />
   </SelectPrimitive.ScrollDownButton>
 ));
-SelectScrollDownButton.displayName =
-  SelectPrimitive.ScrollDownButton.displayName;
+SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
 
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,

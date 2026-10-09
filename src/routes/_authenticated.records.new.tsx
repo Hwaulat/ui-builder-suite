@@ -3,7 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -22,7 +29,7 @@ function NewRecordPage() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   // Mock form state
   const [formData, setFormData] = useState({
     title: "",
@@ -68,27 +75,31 @@ function NewRecordPage() {
       {/* Stepper Progress */}
       <div className="relative flex justify-between">
         <div className="absolute top-1/2 left-0 h-0.5 w-full bg-muted -translate-y-1/2 z-0" />
-        <div 
-          className="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 z-0 transition-all duration-300" 
+        <div
+          className="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 z-0 transition-all duration-300"
           style={{ width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%` }}
         />
-        
+
         {STEPS.map((step) => {
           const isCompleted = step.id < currentStep;
           const isCurrent = step.id === currentStep;
-          
+
           return (
             <div key={step.id} className="relative z-10 flex flex-col items-center gap-2">
-              <div 
+              <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-colors ${
-                  isCompleted ? "bg-primary border-primary text-primary-foreground" :
-                  isCurrent ? "bg-background border-primary text-primary" :
-                  "bg-background border-muted text-muted-foreground"
+                  isCompleted
+                    ? "bg-primary border-primary text-primary-foreground"
+                    : isCurrent
+                      ? "bg-background border-primary text-primary"
+                      : "bg-background border-muted text-muted-foreground"
                 }`}
               >
                 {isCompleted ? <Check className="h-5 w-5" /> : step.id}
               </div>
-              <span className={`text-sm font-medium ${isCurrent ? "text-primary" : "text-muted-foreground"}`}>
+              <span
+                className={`text-sm font-medium ${isCurrent ? "text-primary" : "text-muted-foreground"}`}
+              >
                 {step.title}
               </span>
             </div>
@@ -110,18 +121,18 @@ function NewRecordPage() {
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4">
               <div className="space-y-2">
                 <Label htmlFor="title">Judul Record</Label>
-                <Input 
-                  id="title" 
-                  placeholder="Contoh: Laporan Bulanan Q1" 
+                <Input
+                  id="title"
+                  placeholder="Contoh: Laporan Bulanan Q1"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="category">Kategori</Label>
-                <Input 
-                  id="category" 
-                  placeholder="Keuangan, HR, dll." 
+                <Input
+                  id="category"
+                  placeholder="Keuangan, HR, dll."
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                 />
@@ -133,19 +144,19 @@ function NewRecordPage() {
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4">
               <div className="space-y-2">
                 <Label htmlFor="value">Nilai / Metrik</Label>
-                <Input 
-                  id="value" 
+                <Input
+                  id="value"
                   type="number"
-                  placeholder="0" 
+                  placeholder="0"
                   value={formData.value}
                   onChange={(e) => setFormData({ ...formData, value: e.target.value })}
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="description">Deskripsi</Label>
-                <Textarea 
-                  id="description" 
-                  placeholder="Jelaskan detail record ini..." 
+                <Textarea
+                  id="description"
+                  placeholder="Jelaskan detail record ini..."
                   rows={4}
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -176,9 +187,9 @@ function NewRecordPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="notes">Catatan Tambahan (Opsional)</Label>
-                <Textarea 
-                  id="notes" 
-                  placeholder="Tambahkan catatan untuk approver..." 
+                <Textarea
+                  id="notes"
+                  placeholder="Tambahkan catatan untuk approver..."
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 />
@@ -187,14 +198,14 @@ function NewRecordPage() {
           )}
         </CardContent>
         <CardFooter className="flex justify-between border-t p-6">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={handlePrev}
             disabled={currentStep === 1 || isSubmitting}
           >
             Kembali
           </Button>
-          
+
           {currentStep < 3 ? (
             <Button onClick={handleNext}>
               Selanjutnya <ChevronRight className="ml-2 h-4 w-4" />

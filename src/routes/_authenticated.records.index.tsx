@@ -1,9 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Plus, Search, Filter } from "lucide-react";
 import { useState } from "react";
 
@@ -12,11 +25,35 @@ export const Route = createFileRoute("/_authenticated/records/")({
 });
 
 const mockRecords = [
-  { id: "REC-001", title: "Monthly Report Jan", status: "Approved", date: "2026-01-15", author: "Budi" },
+  {
+    id: "REC-001",
+    title: "Monthly Report Jan",
+    status: "Approved",
+    date: "2026-01-15",
+    author: "Budi",
+  },
   { id: "REC-002", title: "Q1 Financials", status: "Pending", date: "2026-03-31", author: "Siti" },
-  { id: "REC-003", title: "Project Alpha Plan", status: "Draft", date: "2026-04-10", author: "Agus" },
-  { id: "REC-004", title: "Marketing Campaign", status: "Approved", date: "2026-05-01", author: "Dewi" },
-  { id: "REC-005", title: "IT Asset Inventory", status: "Rejected", date: "2026-06-15", author: "Rudi" },
+  {
+    id: "REC-003",
+    title: "Project Alpha Plan",
+    status: "Draft",
+    date: "2026-04-10",
+    author: "Agus",
+  },
+  {
+    id: "REC-004",
+    title: "Marketing Campaign",
+    status: "Approved",
+    date: "2026-05-01",
+    author: "Dewi",
+  },
+  {
+    id: "REC-005",
+    title: "IT Asset Inventory",
+    status: "Rejected",
+    date: "2026-06-15",
+    author: "Rudi",
+  },
 ];
 
 function RecordsPage() {
@@ -24,8 +61,11 @@ function RecordsPage() {
   const [statusFilter, setStatusFilter] = useState("all");
 
   const filteredRecords = mockRecords.filter((record) => {
-    const matchesSearch = record.title.toLowerCase().includes(searchTerm.toLowerCase()) || record.id.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === "all" || record.status.toLowerCase() === statusFilter.toLowerCase();
+    const matchesSearch =
+      record.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      record.id.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus =
+      statusFilter === "all" || record.status.toLowerCase() === statusFilter.toLowerCase();
     return matchesSearch && matchesStatus;
   });
 
@@ -94,11 +134,15 @@ function RecordsPage() {
                   <TableCell>{record.author}</TableCell>
                   <TableCell>{record.date}</TableCell>
                   <TableCell>
-                    <Badge 
+                    <Badge
                       variant={
-                        record.status === "Approved" ? "default" :
-                        record.status === "Pending" ? "secondary" :
-                        record.status === "Rejected" ? "destructive" : "outline"
+                        record.status === "Approved"
+                          ? "default"
+                          : record.status === "Pending"
+                            ? "secondary"
+                            : record.status === "Rejected"
+                              ? "destructive"
+                              : "outline"
                       }
                     >
                       {record.status}

@@ -1,7 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus, Edit2, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -41,7 +48,7 @@ function MasterDataPage() {
           <TabsTrigger value="roles">Roles & Hak Akses</TabsTrigger>
           <TabsTrigger value="settings">Pengaturan Sistem</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="categories" className="space-y-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 w-full max-w-sm">
@@ -81,7 +88,7 @@ function MasterDataPage() {
             </Table>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="roles" className="space-y-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 w-full max-w-sm">
@@ -121,12 +128,12 @@ function MasterDataPage() {
             </Table>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="settings" className="space-y-4">
           <div className="rounded-md border bg-background p-6">
             <h3 className="text-lg font-medium">Pengaturan Umum</h3>
             <p className="text-sm text-muted-foreground mb-4">Konfigurasi dasar aplikasi Anda.</p>
-            
+
             <div className="space-y-4 max-w-md">
               <div className="space-y-2">
                 <label className="text-sm font-medium">Nama Aplikasi</label>

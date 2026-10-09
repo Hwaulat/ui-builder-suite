@@ -28,36 +28,29 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-transparent hover:text-accent-foreground dark:hover:bg-transparent data-[state=open]:bg-transparent dark:data-[state=open]:bg-transparent",
         link: "text-primary underline-offset-4 hover:underline dark:text-primary",
-        download:
-          "bg-green-50 text-green-500 dark:bg-green-900/20 dark:text-green-400",
+        download: "bg-green-50 text-green-500 dark:bg-green-900/20 dark:text-green-400",
         dangers:
           "text-red-500 bg-red-50 rounded-[8px] py-3 px-4 gap-2 dark:bg-red-900/20 dark:text-red-400",
         primary:
           "text-white bg-blue-500 hover:bg-blue-600 rounded-[8px] px-4 gap-2 dark:bg-blue/50 dark:hover:bg-blue-700",
         newPrimary:
           "text-white bg-blue-500 rounded-[8px] py-3 px-4 gap-2 dark:bg-blue-600 dark:hover:bg-blue-700",
-        success:
-          "text-white bg-green-50 text-green-500 dark:bg-green-900/20 dark:text-green-400",
+        success: "text-white bg-green-50 text-green-500 dark:bg-green-900/20 dark:text-green-400",
         warning:
           "text-orange-500 bg-orange-50 rounded-[8px] py-3 px-4 gap-2 dark:bg-orange-900/20 dark:text-orange-400",
-        softDangers:
-          "text-white bg-red-50 dark:bg-red-900/20 dark:text-red-400",
-        boldWarning:
-          "text-white bg-orange-500 dark:bg-orange-600 dark:hover:bg-orange-700",
+        softDangers: "text-white bg-red-50 dark:bg-red-900/20 dark:text-red-400",
+        boldWarning: "text-white bg-orange-500 dark:bg-orange-600 dark:hover:bg-orange-700",
         primaryPagination:
           "text-white bg-blue-50 text-blue-500 border border-blue-100 border-[1px] dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-700",
         plain: "text-black bg-gray-50 dark:bg-gray-800 dark:text-gray-200",
         red: "text-white bg-red-500 rounded-[8px] py-3 px-4 gap-2 dark:bg-red-600 dark:hover:bg-red-700",
         gray: "text-black bg-gray-100 dark:bg-gray-700 dark:text-gray-200",
-        grayDark:
-          "text-white bg-gray-500 dark:bg-gray-600 dark:hover:bg-gray-700",
-        greenDark:
-          "text-white bg-green-500 dark:bg-green-600 dark:hover:bg-green-700",
+        grayDark: "text-white bg-gray-500 dark:bg-gray-600 dark:hover:bg-gray-700",
+        greenDark: "text-white bg-green-500 dark:bg-green-600 dark:hover:bg-green-700",
         blueBca: "text-white bg-[#5385D3] dark:bg-[#5385D3]",
         outlineRed:
           "border-2 border-red-500 text-red-500 hover:bg-red-50 active:bg-red-100 dark:border-red-400 dark:text-red-400 dark:hover:bg-red-900/20",
-        purple:
-          "text-purple-500 bg-purple-50 dark:bg-purple-900/20 dark:text-purple-400",
+        purple: "text-purple-500 bg-purple-50 dark:bg-purple-900/20 dark:text-purple-400",
         bluelight: [
           "bg-blue-300 text-blue-50",
           "hover:bg-blue-300 dark:bg-blue-400 dark:text-blue-50 dark:hover:bg-blue-400",
@@ -75,8 +68,7 @@ const buttonVariants = cva(
           "active:bg-[linear-gradient(0deg,#00000033_0%,#00000033_100%),linear-gradient(283deg,#A31AF2_6%,#1874A5_97%)]",
         ].join(" "),
         blue: "bg-blue-500 hover:bg-blue-600 text-white rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700",
-        lightBlue:
-          "bg-primary-50 text-primary-500 dark:bg-blue-900/20 dark:text-blue-400",
+        lightBlue: "bg-primary-50 text-primary-500 dark:bg-blue-900/20 dark:text-blue-400",
         icon: "p-2 rounded-lg border border-gray-300 hover:bg-gray-100 hover:border-gray-300 text-gray-400 data-[state=open]:bg-gray-100 data-[state=open]:border-gray-300 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:text-gray-400 dark:data-[state=open]:bg-gray-700 dark:data-[state=open]:border-gray-600",
         iconView:
           "w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-600 hover:border-[#1F5AA6] hover:bg-[#EFF4FB] dark:hover:bg-[#1F5AA6]/20 text-gray-200 dark:text-gray-600 hover:text-[#1F5AA6] dark:hover:text-[#1F5AA6]/20 text-gray-400 hover:text-[#1F5AA6] transition-all",
@@ -132,10 +124,7 @@ export type ButtonProps = React.ComponentProps<"button"> &
     label?: string;
   };
 
-export const Button = React.forwardRef<
-  HTMLButtonElement | HTMLAnchorElement,
-  ButtonProps
->(
+export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   (
     {
       className,

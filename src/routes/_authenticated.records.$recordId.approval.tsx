@@ -1,6 +1,13 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -30,13 +37,13 @@ function ApprovalPage() {
     date: "2026-03-31",
   };
 
-  const handleAction = async (action: 'approve' | 'reject') => {
+  const handleAction = async (action: "approve" | "reject") => {
     setIsProcessing(true);
     // Mock API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsProcessing(false);
-    
-    if (action === 'approve') {
+
+    if (action === "approve") {
       toast.success("Record Disetujui", {
         description: `Record ${recordId} telah berhasil disetujui.`,
       });
@@ -45,7 +52,7 @@ function ApprovalPage() {
         description: `Record ${recordId} telah ditolak.`,
       });
     }
-    
+
     router.navigate({ to: "/records" });
   };
 
@@ -66,7 +73,9 @@ function ApprovalPage() {
                 {mockRecord.status}
               </Badge>
             </div>
-            <p className="text-muted-foreground">Silakan periksa detail di bawah sebelum memberikan approval.</p>
+            <p className="text-muted-foreground">
+              Silakan periksa detail di bawah sebelum memberikan approval.
+            </p>
           </div>
         </div>
       </div>
@@ -98,7 +107,8 @@ function ApprovalPage() {
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-sm font-medium text-muted-foreground">Pembuat</div>
                 <div className="col-span-2 text-sm">
-                  {mockRecord.author} <span className="text-muted-foreground">({mockRecord.date})</span>
+                  {mockRecord.author}{" "}
+                  <span className="text-muted-foreground">({mockRecord.date})</span>
                 </div>
               </div>
             </CardContent>
@@ -114,9 +124,9 @@ function ApprovalPage() {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="comments">Komentar / Alasan</Label>
-                <Textarea 
-                  id="comments" 
-                  placeholder="Tambahkan komentar (wajib jika ditolak)..." 
+                <Textarea
+                  id="comments"
+                  placeholder="Tambahkan komentar (wajib jika ditolak)..."
                   value={comments}
                   onChange={(e) => setComments(e.target.value)}
                   rows={4}
@@ -124,18 +134,18 @@ function ApprovalPage() {
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-3">
-              <Button 
-                className="w-full bg-green-600 hover:bg-green-700 text-white" 
-                onClick={() => handleAction('approve')}
+              <Button
+                className="w-full bg-green-600 hover:bg-green-700 text-white"
+                onClick={() => handleAction("approve")}
                 disabled={isProcessing}
               >
                 <CheckCircle2 className="mr-2 h-4 w-4" />
                 {isProcessing ? "Memproses..." : "Approve Record"}
               </Button>
-              <Button 
-                variant="destructive" 
+              <Button
+                variant="destructive"
                 className="w-full"
-                onClick={() => handleAction('reject')}
+                onClick={() => handleAction("reject")}
                 disabled={isProcessing || comments.length < 5}
               >
                 <XCircle className="mr-2 h-4 w-4" />

@@ -7,14 +7,7 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { 
-  LayoutDashboard, 
-  ListFilter, 
-  Database, 
-  FileText,
-  CheckSquare,
-  Users
-} from "lucide-react";
+import { LayoutDashboard, ListFilter, Database, FileText, CheckSquare, Users } from "lucide-react";
 import SidebarItem from "../global-sidebar/sidebar-item";
 
 const coreFunctions = [
@@ -37,7 +30,11 @@ const coreFunctions = [
     title: "Approval",
     url: "/records",
     icon: CheckSquare,
-    badge: <span className="bg-[#1F5AA6] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2</span>
+    badge: (
+      <span className="bg-[#1F5AA6] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+        2
+      </span>
+    ),
   },
 ];
 
@@ -49,8 +46,8 @@ const setupSystem = [
     children: [
       { label: "Part", path: "/master-data/part", icon: ListFilter },
       { label: "Equipment", path: "/master-data/equipment", icon: CheckSquare },
-      { label: "Checksheet", path: "/master-data/checksheet", icon: FileText }
-    ]
+      { label: "Checksheet", path: "/master-data/checksheet", icon: FileText },
+    ],
   },
   {
     title: "Users Management",
@@ -68,12 +65,14 @@ export function AppSidebar() {
             <span className="text-white font-bold italic">D</span>
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-sm tracking-tight text-white leading-tight">RDL - Quality</span>
+            <span className="font-bold text-sm tracking-tight text-white leading-tight">
+              RDL - Quality
+            </span>
             <span className="text-xs text-[#7A9BBE]">Control System</span>
           </div>
         </div>
       </SidebarHeader>
-      
+
       <SidebarContent className="bg-[#0B1120]">
         <SidebarGroup className="pt-2">
           <SidebarGroupLabel className="text-[#476282] text-xs font-semibold px-4 mb-2 tracking-wider">
@@ -81,14 +80,14 @@ export function AppSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent className="px-2 space-y-1">
             {coreFunctions.map((item) => (
-              <SidebarItem 
-                key={item.title} 
+              <SidebarItem
+                key={item.title}
                 item={{
                   label: item.title,
                   path: item.url,
                   icon: item.icon,
-                  type: 'item',
-                  badge: item.badge
+                  type: "item",
+                  badge: item.badge,
                 }}
                 collapsed={false}
                 isMobile={false}
@@ -97,22 +96,24 @@ export function AppSidebar() {
             ))}
           </SidebarGroupContent>
         </SidebarGroup>
-        
+
         <SidebarGroup className="pt-2">
           <SidebarGroupLabel className="text-[#476282] text-xs font-semibold px-4 mb-2 tracking-wider">
             SETUP SYSTEM
           </SidebarGroupLabel>
           <SidebarGroupContent className="px-2 space-y-1">
             {setupSystem.map((item) => (
-              <SidebarItem 
-                key={item.title} 
-                item={{
-                  label: item.title,
-                  path: item.url,
-                  icon: item.icon,
-                  type: 'item',
-                  children: item.children
-                } as any}
+              <SidebarItem
+                key={item.title}
+                item={
+                  {
+                    label: item.title,
+                    path: item.url,
+                    icon: item.icon,
+                    type: "item",
+                    children: item.children,
+                  } as any
+                }
                 collapsed={false}
                 isMobile={false}
                 canAccess={() => true}

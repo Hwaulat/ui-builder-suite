@@ -2,10 +2,7 @@ import { forwardRef, type ComponentProps } from "react";
 import { cn } from "@/utils/cn";
 
 const Label = forwardRef<HTMLLabelElement, ComponentProps<"label">>(
-  ({
-    className,
-    ...props
-  }, ref) => {
+  ({ className, ...props }, ref) => {
     return (
       <label
         ref={ref}
@@ -14,7 +11,7 @@ const Label = forwardRef<HTMLLabelElement, ComponentProps<"label">>(
         {...props}
       />
     );
-  }
+  },
 );
 
-export { Label }
+export { Label };

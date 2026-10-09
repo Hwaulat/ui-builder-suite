@@ -1,10 +1,7 @@
-import { cn } from '@/utils/cn';
-import { Label } from './label';
-import { forwardRef } from 'react';
-import SelectBase, {
-  type SelectInstance,
-  type Props as SelectProps,
-} from 'react-select';
+import { cn } from "@/utils/cn";
+import { Label } from "./label";
+import { forwardRef } from "react";
+import SelectBase, { type SelectInstance, type Props as SelectProps } from "react-select";
 
 export type SelectOptionProps = {
   label: any;
@@ -20,10 +17,7 @@ type InfiniteScrollProps = {
   onLoadMore?: () => void;
 };
 
-type BaseSelectProps = Omit<
-  SelectProps<SelectOptionProps, boolean>,
-  'options' | 'onChange'
-> & {
+type BaseSelectProps = Omit<SelectProps<SelectOptionProps, boolean>, "options" | "onChange"> & {
   datalist: SelectOptionProps[];
   label?: string;
   disabled?: boolean;
@@ -46,113 +40,106 @@ type MultiSelectProps = BaseSelectProps & {
 
 export type CustomSelectProps = SinglSelectProps | MultiSelectProps;
 
-const SelectInput = forwardRef<
-  SelectInstance<SelectOptionProps, boolean>,
-  CustomSelectProps
->(function SelectInput(
-  {
-    label,
-    datalist,
-    defValue,
-    errorMsg,
-    required,
-    disabled,
-    containerClassName,
-    onChange,
-    infiniteScroll,
-    hideClear,
-    ...props
+const SelectInput = forwardRef<SelectInstance<SelectOptionProps, boolean>, CustomSelectProps>(
+  function SelectInput(
+    {
+      label,
+      datalist,
+      defValue,
+      errorMsg,
+      required,
+      disabled,
+      containerClassName,
+      onChange,
+      infiniteScroll,
+      hideClear,
+      ...props
+    },
+    ref,
+  ) {
+    const hasError = Boolean(errorMsg && errorMsg.trim());
+
+    const defaultValue = Array.isArray(defValue)
+      ? datalist.filter((item) => defValue.includes(item.value))
+      : datalist.find((item) => item.value === defValue) || null;
+
+    return (
+      <div className={cn("flex flex-col gap-2 w-full", containerClassName)}>
+        {label && (
+          <Label>
+            {label}
+            {required && <sup className="text-red-500">*</sup>}
+          </Label>
+        )}
+
+        <SelectBase
+          ref={ref}
+          options={datalist}
+          isMulti={props.isMulti}
+          isDisabled={disabled}
+          isClearable={hideClear ? false : true}
+          unstyled
+          menuPosition="absolute"
+          menuPortalTarget={document.body}
+          menuShouldScrollIntoView={false}
+          closeMenuOnSelect={!props.isMulti}
+          defaultValue={defaultValue}
+          placeholder={props.placeholder ?? "Not Selected"}
+          isOptionDisabled={(option) => !!option.isDisabled}
+          styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+          onMenuScrollToBottom={() => {
+            if (infiniteScroll?.hasMore && !infiniteScroll?.loading) {
+              infiniteScroll.onLoadMore?.();
+            }
+          }}
+          noOptionsMessage={() => (infiniteScroll?.loading ? "Loading..." : "No options")}
+          onChange={(val) => {
+            if (props.isMulti) {
+              const values = Array.isArray(val) ? val.map((item) => item.value) : [];
+
+              (onChange as MultiSelectProps["onChange"])?.(values);
+            } else {
+              const value = (val as SelectOptionProps | null)?.value;
+
+              (onChange as SinglSelectProps["onChange"])?.(value ?? null);
+            }
+          }}
+          classNames={{
+            control: () =>
+              cn(
+                "!min-h-[40px] !px-4 border rounded-lg bg-neutral-3 dark:bg-gray-800 text-sm border-gray-200 dark:border-gray-700",
+                hasError && "bg-white border-red-500",
+                disabled && "bg-[#D0D3D9] text-neutral-9",
+              ),
+
+            menu: () =>
+              "mt-2 py-2 border rounded-lg text-sm border-gray-100 dark:bg-gray-800 dark:border-gray-700 shadow-xs bg-white",
+
+            multiValue: () => "gap-1 py-1.5 px-2 mr-1",
+
+            multiValueRemove: () => "mt-0.5 px-0 mr-0",
+
+            option: ({ isFocused, isSelected }) =>
+              cn(
+                "!flex items-center min-h-9 px-3 border-l-2 border-transparent !text-sm hover:bg-blue-50 dark:hover:bg-gray-700 hover:border-blue-500",
+                (isFocused || isSelected) && "bg-blue-50 dark:bg-gray-700 border-blue-500",
+              ),
+
+            placeholder: ({ isDisabled }) => cn("text-gray-400", isDisabled && "text-neutral-9"),
+
+            valueContainer: () => "stroke-0 mr-2",
+
+            clearIndicator: () => "stroke-0 mr-1 text-gray-400",
+
+            dropdownIndicator: () => "stroke-0 mr-0 text-gray-400",
+          }}
+          {...props}
+        />
+
+        {hasError && <p className="text-sm text-red-500">{errorMsg}</p>}
+      </div>
+    );
   },
-  ref,
-) {
-  const hasError = Boolean(errorMsg && errorMsg.trim());
-
-  const defaultValue = Array.isArray(defValue)
-    ? datalist.filter((item) => defValue.includes(item.value))
-    : datalist.find((item) => item.value === defValue) || null;
-
-  return (
-    <div className={cn('flex flex-col gap-2 w-full', containerClassName)}>
-      {label && (
-        <Label>
-          {label}
-          {required && <sup className="text-red-500">*</sup>}
-        </Label>
-      )}
-
-      <SelectBase
-        ref={ref}
-        options={datalist}
-        isMulti={props.isMulti}
-        isDisabled={disabled}
-        isClearable={hideClear ? false : true}
-        unstyled
-        menuPosition="absolute"
-        menuPortalTarget={document.body}
-        menuShouldScrollIntoView={false}
-        closeMenuOnSelect={!props.isMulti}
-        defaultValue={defaultValue}
-        placeholder={props.placeholder ?? 'Not Selected'}
-        isOptionDisabled={(option) => !!option.isDisabled}
-        styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-        onMenuScrollToBottom={() => {
-          if (infiniteScroll?.hasMore && !infiniteScroll?.loading) {
-            infiniteScroll.onLoadMore?.();
-          }
-        }}
-        noOptionsMessage={() =>
-          infiniteScroll?.loading ? 'Loading...' : 'No options'
-        }
-        onChange={(val) => {
-          if (props.isMulti) {
-            const values = Array.isArray(val)
-              ? val.map((item) => item.value)
-              : [];
-
-            (onChange as MultiSelectProps['onChange'])?.(values);
-          } else {
-            const value = (val as SelectOptionProps | null)?.value;
-
-            (onChange as SinglSelectProps['onChange'])?.(value ?? null);
-          }
-        }}
-        classNames={{
-          control: () =>
-            cn(
-              '!min-h-[40px] !px-4 border rounded-lg bg-neutral-3 dark:bg-gray-800 text-sm border-gray-200 dark:border-gray-700',
-              hasError && 'bg-white border-red-500',
-              disabled && 'bg-[#D0D3D9] text-neutral-9',
-            ),
-
-          menu: () =>
-            'mt-2 py-2 border rounded-lg text-sm border-gray-100 dark:bg-gray-800 dark:border-gray-700 shadow-xs bg-white',
-
-          multiValue: () => 'gap-1 py-1.5 px-2 mr-1',
-
-          multiValueRemove: () => 'mt-0.5 px-0 mr-0',
-
-          option: ({ isFocused, isSelected }) =>
-            cn(
-              '!flex items-center min-h-9 px-3 border-l-2 border-transparent !text-sm hover:bg-blue-50 dark:hover:bg-gray-700 hover:border-blue-500',
-              (isFocused || isSelected) &&
-                'bg-blue-50 dark:bg-gray-700 border-blue-500',
-            ),
-
-          placeholder: ({ isDisabled }) =>
-            cn('text-gray-400', isDisabled && 'text-neutral-9'),
-
-          valueContainer: () => 'stroke-0 mr-2',
-
-          clearIndicator: () => 'stroke-0 mr-1 text-gray-400',
-
-          dropdownIndicator: () => 'stroke-0 mr-0 text-gray-400',
-        }}
-        {...props}
-      />
-
-      {hasError && <p className="text-sm text-red-500">{errorMsg}</p>}
-    </div>
-  );
-});
+);
 
 export { SelectInput };

@@ -23,8 +23,8 @@ function CreateAssemblyChecksheetPage() {
       {/* Header */}
       <div className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
         <div className="flex items-center gap-4">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="border-gray-200 text-gray-700 rounded-lg font-medium px-4 h-10"
             icon={<ChevronLeft className="w-4 h-4" />}
             label="Back"
@@ -33,11 +33,14 @@ function CreateAssemblyChecksheetPage() {
           <div className="h-6 w-[1px] bg-gray-200"></div>
           <h1 className="text-xl font-bold text-gray-800 flex items-center gap-2">
             <Plus className="w-6 h-6 text-gray-800" />
-            Create Checksheet <span className="text-[#2b5a9e] italic font-semibold text-lg ml-1">(Asembly/Finishing)</span>
+            Create Checksheet{" "}
+            <span className="text-[#2b5a9e] italic font-semibold text-lg ml-1">
+              (Asembly/Finishing)
+            </span>
           </h1>
         </div>
-        <Button 
-          variant="primary" 
+        <Button
+          variant="primary"
           className="bg-[#2b5a9e] hover:bg-[#22487e] text-white px-8 rounded-lg font-medium h-10"
           label="Submit"
         />
@@ -66,13 +69,13 @@ function CreateAssemblyChecksheetPage() {
 
         {/* Tabs */}
         <div className="pt-2">
-          <Tabs 
+          <Tabs
             variant="primary"
             defaultValue="marking"
             items={[
               { value: "marking", label: "Marking", content: null },
               { value: "clamp", label: "Clamp Assy", content: null },
-              { value: "inspection", label: "Inspection & Packing", content: null }
+              { value: "inspection", label: "Inspection & Packing", content: null },
             ]}
           />
         </div>
@@ -80,14 +83,22 @@ function CreateAssemblyChecksheetPage() {
         {/* Checksheet Form */}
         <div className="space-y-4">
           <h2 className="text-lg font-bold text-gray-800">Checksheet</h2>
-          
+
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
             {/* Table Header */}
             <div className="grid grid-cols-[100px_40px_1fr_250px] gap-4 px-6 py-3 border-b border-gray-100 bg-gray-50/50">
-              <div className="text-[11px] font-bold text-gray-500 tracking-wider text-center">IMPORTANT<br/>RANK</div>
+              <div className="text-[11px] font-bold text-gray-500 tracking-wider text-center">
+                IMPORTANT
+                <br />
+                RANK
+              </div>
               <div></div>
-              <div className="text-[11px] font-bold text-gray-500 tracking-wider flex items-end uppercase">INSPECTION ITEM</div>
-              <div className="text-[11px] font-bold text-gray-500 tracking-wider flex items-end uppercase pl-2">INSPECTION INSTRUMENT</div>
+              <div className="text-[11px] font-bold text-gray-500 tracking-wider flex items-end uppercase">
+                INSPECTION ITEM
+              </div>
+              <div className="text-[11px] font-bold text-gray-500 tracking-wider flex items-end uppercase pl-2">
+                INSPECTION INSTRUMENT
+              </div>
             </div>
 
             {/* Group 1 */}
@@ -98,17 +109,38 @@ function CreateAssemblyChecksheetPage() {
                 </div>
               </div>
               <div className="flex items-center justify-center"></div>
-              
+
               <div className="col-span-2 space-y-3">
                 <div className="grid grid-cols-[1fr_250px] gap-4">
-                  <Input value="Marking Jig" className="bg-white border-gray-200 h-10 text-gray-700" />
-                  <SelectInput isMulti={false} datalist={mockInstrumentOptions} defValue="OK/NG" containerClassName="bg-white" />
+                  <Input
+                    value="Marking Jig"
+                    className="bg-white border-gray-200 h-10 text-gray-700"
+                  />
+                  <SelectInput
+                    isMulti={false}
+                    datalist={mockInstrumentOptions}
+                    defValue="OK/NG"
+                    containerClassName="bg-white"
+                  />
                 </div>
                 <div className="grid grid-cols-[1fr_250px] gap-4">
-                  <Input value="Tidak ada kerusakan (baut longgar, engsel rusak, burr, retak atau cacat pada jig" className="bg-white border-gray-200 h-10 text-gray-700" />
-                  <SelectInput isMulti={false} datalist={mockInstrumentOptions} defValue="OK/NG" containerClassName="bg-white" />
+                  <Input
+                    value="Tidak ada kerusakan (baut longgar, engsel rusak, burr, retak atau cacat pada jig"
+                    className="bg-white border-gray-200 h-10 text-gray-700"
+                  />
+                  <SelectInput
+                    isMulti={false}
+                    datalist={mockInstrumentOptions}
+                    defValue="OK/NG"
+                    containerClassName="bg-white"
+                  />
                 </div>
-                <Button variant="outline" className="h-9 border-gray-200 text-gray-600 rounded-lg font-medium px-4 bg-white" icon={<Plus className="w-4 h-4" />} label="Add New" />
+                <Button
+                  variant="outline"
+                  className="h-9 border-gray-200 text-gray-600 rounded-lg font-medium px-4 bg-white"
+                  icon={<Plus className="w-4 h-4" />}
+                  label="Add New"
+                />
               </div>
             </div>
 
@@ -124,21 +156,50 @@ function CreateAssemblyChecksheetPage() {
                   VISE SIDE
                 </span>
               </div>
-              
+
               <div className="col-span-2 space-y-3 py-2">
                 <div className="grid grid-cols-[1fr_250px] gap-4">
-                  <Input value="Warna marking persegi panjang - blue (biru)" className="bg-white border-gray-200 h-10 text-gray-700" />
-                  <SelectInput isMulti={false} datalist={mockInstrumentOptions} defValue="OK/NG" containerClassName="bg-white" />
+                  <Input
+                    value="Warna marking persegi panjang - blue (biru)"
+                    className="bg-white border-gray-200 h-10 text-gray-700"
+                  />
+                  <SelectInput
+                    isMulti={false}
+                    datalist={mockInstrumentOptions}
+                    defValue="OK/NG"
+                    containerClassName="bg-white"
+                  />
                 </div>
                 <div className="grid grid-cols-[1fr_250px] gap-4">
-                  <Input value="Ukuran marking 10+3x3" className="bg-white border-gray-200 h-10 text-gray-700" />
-                  <SelectInput isMulti={false} datalist={mockInstrumentOptions} defValue="Numeric" containerClassName="bg-white" />
+                  <Input
+                    value="Ukuran marking 10+3x3"
+                    className="bg-white border-gray-200 h-10 text-gray-700"
+                  />
+                  <SelectInput
+                    isMulti={false}
+                    datalist={mockInstrumentOptions}
+                    defValue="Numeric"
+                    containerClassName="bg-white"
+                  />
                 </div>
                 <div className="grid grid-cols-[1fr_250px] gap-4">
-                  <Input value="Psosi marking (dengan jig inspection)" className="bg-white border-gray-200 h-10 text-gray-700" />
-                  <SelectInput isMulti={false} datalist={mockInstrumentOptions} defValue="Numeric" containerClassName="bg-white" />
+                  <Input
+                    value="Psosi marking (dengan jig inspection)"
+                    className="bg-white border-gray-200 h-10 text-gray-700"
+                  />
+                  <SelectInput
+                    isMulti={false}
+                    datalist={mockInstrumentOptions}
+                    defValue="Numeric"
+                    containerClassName="bg-white"
+                  />
                 </div>
-                <Button variant="outline" className="h-9 border-gray-200 text-gray-600 rounded-lg font-medium px-4 bg-white" icon={<Plus className="w-4 h-4" />} label="Add New" />
+                <Button
+                  variant="outline"
+                  className="h-9 border-gray-200 text-gray-600 rounded-lg font-medium px-4 bg-white"
+                  icon={<Plus className="w-4 h-4" />}
+                  label="Add New"
+                />
               </div>
             </div>
 
@@ -154,24 +215,52 @@ function CreateAssemblyChecksheetPage() {
                   INSERTION SIDE
                 </span>
               </div>
-              
+
               <div className="col-span-2 space-y-3 py-2">
                 <div className="grid grid-cols-[1fr_250px] gap-4">
-                  <Input value="Warna marking persegi panjang - blue (biru)" className="bg-white border-gray-200 h-10 text-gray-700" />
-                  <SelectInput isMulti={false} datalist={mockInstrumentOptions} defValue="OK/NG" containerClassName="bg-white" />
+                  <Input
+                    value="Warna marking persegi panjang - blue (biru)"
+                    className="bg-white border-gray-200 h-10 text-gray-700"
+                  />
+                  <SelectInput
+                    isMulti={false}
+                    datalist={mockInstrumentOptions}
+                    defValue="OK/NG"
+                    containerClassName="bg-white"
+                  />
                 </div>
                 <div className="grid grid-cols-[1fr_250px] gap-4">
-                  <Input value="Ukuran marking 10+3x3" className="bg-white border-gray-200 h-10 text-gray-700" />
-                  <SelectInput isMulti={false} datalist={mockInstrumentOptions} defValue="Numeric" containerClassName="bg-white" />
+                  <Input
+                    value="Ukuran marking 10+3x3"
+                    className="bg-white border-gray-200 h-10 text-gray-700"
+                  />
+                  <SelectInput
+                    isMulti={false}
+                    datalist={mockInstrumentOptions}
+                    defValue="Numeric"
+                    containerClassName="bg-white"
+                  />
                 </div>
                 <div className="grid grid-cols-[1fr_250px] gap-4">
-                  <Input value="Psosi marking (dengan jig inspection)" className="bg-white border-gray-200 h-10 text-gray-700" />
-                  <SelectInput isMulti={false} datalist={mockInstrumentOptions} defValue="Numeric" containerClassName="bg-white" />
+                  <Input
+                    value="Psosi marking (dengan jig inspection)"
+                    className="bg-white border-gray-200 h-10 text-gray-700"
+                  />
+                  <SelectInput
+                    isMulti={false}
+                    datalist={mockInstrumentOptions}
+                    defValue="Numeric"
+                    containerClassName="bg-white"
+                  />
                 </div>
-                <Button variant="outline" className="h-9 border-gray-200 text-gray-600 rounded-lg font-medium px-4 bg-white" icon={<Plus className="w-4 h-4" />} label="Add New" />
+                <Button
+                  variant="outline"
+                  className="h-9 border-gray-200 text-gray-600 rounded-lg font-medium px-4 bg-white"
+                  icon={<Plus className="w-4 h-4" />}
+                  label="Add New"
+                />
               </div>
             </div>
-
           </div>
         </div>
       </div>

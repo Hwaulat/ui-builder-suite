@@ -1,12 +1,6 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from './select';
-import { ChevronLeftDouble, ChevronRightDouble } from '@untitledui/icons';
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
+import { ChevronLeftDouble, ChevronRightDouble } from "@untitledui/icons";
 
 interface Props {
   currentPage: number;
@@ -26,7 +20,7 @@ export default function PaginationDefault({
   onPageChange,
   onRowsPerPageChange,
   rowsPerPageOptions = [5, 10, 20, 50],
-  spacing = 'gap-3',
+  spacing = "gap-3",
 }: Props) {
   const options = rowsPerPageOptions.map((n) => ({
     label: n,
@@ -36,9 +30,7 @@ export default function PaginationDefault({
     <div
       className={`flex flex-wrap items-center justify-between ${spacing} px-5 py-4 border-t border-gray-100 dark:border-gray-700`}
     >
-      <div
-        className={`flex items-center ${spacing} text-sm text-gray-500 dark:text-gray-400`}
-      >
+      <div className={`flex items-center ${spacing} text-sm text-gray-500 dark:text-gray-400`}>
         <div className="flex items-center gap-2">
           <span className="text-sm text-nowrap font-medium">Rows per page</span>
           <Select
@@ -59,8 +51,8 @@ export default function PaginationDefault({
         </div>
         <span className="text-sm tracking-widest font-medium dark:text-gray-500">
           {totalItems === 0
-            ? '0'
-            : `${(currentPage - 1) * rowsPerPage + 1}–${Math.min(currentPage * rowsPerPage, totalItems)}`}{' '}
+            ? "0"
+            : `${(currentPage - 1) * rowsPerPage + 1}–${Math.min(currentPage * rowsPerPage, totalItems)}`}{" "}
           of {totalItems}
         </span>
       </div>
@@ -81,9 +73,7 @@ export default function PaginationDefault({
         </button>
         {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
           const startPage =
-            totalPages > 5
-              ? Math.max(1, Math.min(currentPage - 2, totalPages - 4))
-              : 1;
+            totalPages > 5 ? Math.max(1, Math.min(currentPage - 2, totalPages - 4)) : 1;
           const page = startPage + i;
           if (page > totalPages) return null;
           return (
@@ -92,8 +82,8 @@ export default function PaginationDefault({
               onClick={() => onPageChange(page)}
               className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${
                 page === currentPage
-                  ? 'bg-[#1F5AA6] text-white'
-                  : 'border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  ? "bg-[#1F5AA6] text-white"
+                  : "border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
               }`}
             >
               {page}

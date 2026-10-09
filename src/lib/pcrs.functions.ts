@@ -107,7 +107,9 @@ export const completeStep = createServerFn({ method: "POST" })
 
     const { data: step, error } = await supabase
       .from("process_steps")
-      .select("id, record_id, process_name, sequence, status, work_date, operator_name, quantity_checked")
+      .select(
+        "id, record_id, process_name, sequence, status, work_date, operator_name, quantity_checked",
+      )
       .eq("id", data.step_id)
       .maybeSingle();
     if (error) throw new Error(error.message);
@@ -205,7 +207,11 @@ export const submitRecord = createServerFn({ method: "POST" })
     await recomputeTotals(supabase, data.record_id);
     const { error } = await supabase
       .from("progress_records")
-      .update({ status: "waiting_approval", submitted_at: new Date().toISOString(), review_note: null })
+      .update({
+        status: "waiting_approval",
+        submitted_at: new Date().toISOString(),
+        review_note: null,
+      })
       .eq("id", data.record_id);
     if (error) throw new Error(error.message);
     return { ok: true as const };

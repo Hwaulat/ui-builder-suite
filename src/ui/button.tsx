@@ -21,16 +21,13 @@ const buttonVariants = cva(
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "border border-gray-100 shadow bg-background text-foreground hover:bg-gray-100 hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         download: "bg-green-50 text-green-500",
         dangers: "text-red-500 bg-red-50 rounded-[8px] py-3 px-4 gap-2",
         primary: "text-primary-500 bg-blue-50 rounded-[8px] py-3 px-4 gap-2",
-        newPrimary:
-          "text-white bg-blue-500 rounded-[8px] py-3 px-4 gap-2",
+        newPrimary: "text-white bg-blue-500 rounded-[8px] py-3 px-4 gap-2",
         success: "text-white bg-green-50 text-green-500",
         warning: "text-orange-500 bg-orange-50 rounded-[8px] py-3 px-4 gap-2",
         softDangers: "text-white bg-red-50",
@@ -43,13 +40,9 @@ const buttonVariants = cva(
         greyDark: "text-white bg-gray-500",
         greenDark: "text-white bg-green-500",
         blueBca: "text-white bg-[#5385D3]",
-        outlineRed:
-          "border-2 border-red-500 text-red-500 hover:bg-red-50 active:bg-red-100",
+        outlineRed: "border-2 border-red-500 text-red-500 hover:bg-red-50 active:bg-red-100",
         purple: "text-purple-500 bg-purple-50",
-        bluelight: [
-          "bg-blue-300 text-blue-50",
-          "hover:bg-blue-300",
-        ].join(" "),
+        bluelight: ["bg-blue-300 text-blue-50", "hover:bg-blue-300"].join(" "),
         gradient: [
           "text-white",
           "bg-[linear-gradient(90deg,#1874A5,#A31AF2)]",
@@ -67,16 +60,21 @@ const buttonVariants = cva(
         icon: "p-2 rounded-lg border border-gray-300 hover:bg-gray-100 hover:border-gray-300 text-gray-400 data-[state=open]:bg-gray-100 data-[state=open]:border-gray-300",
       },
       intent: {
-        edit:    "hover:border-orange-300 hover:bg-orange-50  hover:text-orange-500  hover:shadow-none active:bg-orange-100",
-        delete:  "hover:border-red-300    hover:bg-red-50     hover:text-red-500     hover:shadow-none active:bg-red-100",
-        view:    "hover:border-blue-300   hover:bg-blue-50    hover:text-blue-500    hover:shadow-none active:bg-blue-100",
-        primary:    "hover:border-blue-300   hover:bg-blue-50    hover:text-blue-500    hover:shadow-none active:bg-blue-100",
-        lock:    "hover:border-orange-300   hover:bg-orange-50   hover:text-orange-600    hover:shadow-none active:bg-orange-200",
-        key:     "hover:border-amber-300  hover:bg-amber-50   hover:text-amber-500   hover:shadow-none active:bg-amber-100",
-        success: "hover:border-green-300  hover:bg-green-50   hover:text-green-500   hover:shadow-none active:bg-green-100",
-        info:    "hover:border-cyan-300   hover:bg-cyan-50    hover:text-cyan-500    hover:shadow-none active:bg-cyan-100",
-        warning: "hover:border-yellow-300 hover:bg-yellow-50  hover:text-yellow-500  hover:shadow-none active:bg-yellow-100",
-        purple:  "hover:border-purple-300 hover:bg-purple-50  hover:text-purple-500  hover:shadow-none active:bg-purple-100",
+        edit: "hover:border-orange-300 hover:bg-orange-50  hover:text-orange-500  hover:shadow-none active:bg-orange-100",
+        delete:
+          "hover:border-red-300    hover:bg-red-50     hover:text-red-500     hover:shadow-none active:bg-red-100",
+        view: "hover:border-blue-300   hover:bg-blue-50    hover:text-blue-500    hover:shadow-none active:bg-blue-100",
+        primary:
+          "hover:border-blue-300   hover:bg-blue-50    hover:text-blue-500    hover:shadow-none active:bg-blue-100",
+        lock: "hover:border-orange-300   hover:bg-orange-50   hover:text-orange-600    hover:shadow-none active:bg-orange-200",
+        key: "hover:border-amber-300  hover:bg-amber-50   hover:text-amber-500   hover:shadow-none active:bg-amber-100",
+        success:
+          "hover:border-green-300  hover:bg-green-50   hover:text-green-500   hover:shadow-none active:bg-green-100",
+        info: "hover:border-cyan-300   hover:bg-cyan-50    hover:text-cyan-500    hover:shadow-none active:bg-cyan-100",
+        warning:
+          "hover:border-yellow-300 hover:bg-yellow-50  hover:text-yellow-500  hover:shadow-none active:bg-yellow-100",
+        purple:
+          "hover:border-purple-300 hover:bg-purple-50  hover:text-purple-500  hover:shadow-none active:bg-purple-100",
         // add more intents icon colors as needed
       },
       size: {
@@ -122,7 +120,6 @@ export const Button = ({
   children,
   ...props
 }: ButtonProps) => {
-
   const Comp: React.ElementType = asChild ? Slot : href ? "a" : "button";
 
   return (

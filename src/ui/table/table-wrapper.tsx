@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react';
-import Pagination1 from '../pagination-default';
-import { Table, TBody, Td, Th, THead, Tr } from '../table';
-import type { SortDir } from '../table';
-import { SortIcon } from '../sort';
-import { PackageSearch } from 'lucide-react';
+import { useMemo, useState } from "react";
+import Pagination1 from "../pagination-default";
+import { Table, TBody, Td, Th, THead, Tr } from "../table";
+import type { SortDir } from "../table";
+import { SortIcon } from "../sort";
+import { PackageSearch } from "lucide-react";
 
 export type SortKey = string;
 export type { SortDir };
@@ -12,7 +12,7 @@ interface TableColumn {
   key: string;
   label: string;
   sortable?: boolean;
-  align?: 'left' | 'center' | 'right';
+  align?: "left" | "center" | "right";
   render?: (row: any, idx: number) => React.ReactNode;
   className?: string;
 }
@@ -27,36 +27,32 @@ interface Table1Props {
 export default function TableWrapper({
   data,
   columns,
-  spacing = 'px-4 py-3.5',
+  spacing = "px-4 py-3.5",
   rowsPerPageOptions = [5, 10, 20, 50],
 }: Table1Props) {
-  const [sortKey, setSortKey] = useState<SortKey>(columns[0]?.key || '');
-  const [sortDir, setSortDir] = useState<SortDir>('desc');
+  const [sortKey, setSortKey] = useState<SortKey>(columns[0]?.key || "");
+  const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[1] || 10);
 
   const filteredData = useMemo(() => {
     if (!sortKey) return data;
     return [...data].sort((a, b) => {
-      const cmp =
-        a[sortKey] < b[sortKey] ? -1 : a[sortKey] > b[sortKey] ? 1 : 0;
-      return sortDir === 'asc' ? cmp : -cmp;
+      const cmp = a[sortKey] < b[sortKey] ? -1 : a[sortKey] > b[sortKey] ? 1 : 0;
+      return sortDir === "asc" ? cmp : -cmp;
     });
   }, [data, sortKey, sortDir]);
 
   const handleSort = (key: SortKey) => {
-    if (sortKey === key) setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+    if (sortKey === key) setSortDir((d) => (d === "asc" ? "desc" : "asc"));
     else {
       setSortKey(key);
-      setSortDir('asc');
+      setSortDir("asc");
     }
     setCurrentPage(1);
   };
 
-  const paginated = filteredData.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage,
-  );
+  const paginated = filteredData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
 
   return (
     <>
@@ -67,18 +63,14 @@ export default function TableWrapper({
               {columns.map((col) => (
                 <Th
                   key={col.key}
-                  className={`${spacing} ${col.className || ''} text-gray-500 dark:text-gray-400 font-semibold text-xs uppercase tracking-wide ${col.sortable ? 'cursor-pointer hover:text-gray-700 dark:hover:text-gray-200 select-none' : ''}`}
+                  className={`${spacing} ${col.className || ""} text-gray-500 dark:text-gray-400 font-semibold text-xs uppercase tracking-wide ${col.sortable ? "cursor-pointer hover:text-gray-700 dark:hover:text-gray-200 select-none" : ""}`}
                   onClick={col.sortable ? () => handleSort(col.key) : undefined}
-                  style={{ textAlign: col.align || 'left' }}
+                  style={{ textAlign: col.align || "left" }}
                 >
                   <div className="flex items-center gap-2">
                     {col.label}
                     {col.sortable && (
-                      <SortIcon
-                        column={col.key}
-                        sortKey={sortKey}
-                        sortDir={sortDir}
-                      />
+                      <SortIcon column={col.key} sortKey={sortKey} sortDir={sortDir} />
                     )}
                   </div>
                 </Th>
@@ -88,15 +80,10 @@ export default function TableWrapper({
           <TBody>
             {paginated.length === 0 ? (
               <Tr>
-                <Td
-                  colSpan={columns.length}
-                  className={`${spacing} text-center`}
-                >
+                <Td colSpan={columns.length} className={`${spacing} text-center`}>
                   <div className="flex flex-col items-center gap-3">
                     <PackageSearch className="w-10 h-10 text-gray-200 dark:text-gray-600" />
-                    <p className="text-gray-400 dark:text-gray-500 text-sm">
-                      No data found
-                    </p>
+                    <p className="text-gray-400 dark:text-gray-500 text-sm">No data found</p>
                   </div>
                 </Td>
               </Tr>
@@ -109,10 +96,10 @@ export default function TableWrapper({
                   {columns.map((col) => (
                     <Td
                       key={col.key}
-                      className={`${spacing} ${col.className || ''}`}
-                      style={{ textAlign: col.align || 'left' }}
+                      className={`${spacing} ${col.className || ""}`}
+                      style={{ textAlign: col.align || "left" }}
                     >
-                      {col.render ? col.render(row, idx) : row[col.key]}{' '}
+                      {col.render ? col.render(row, idx) : row[col.key]}{" "}
                     </Td>
                   ))}
                 </Tr>

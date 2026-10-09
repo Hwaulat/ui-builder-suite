@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation } from '@tanstack/react-router';
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "@tanstack/react-router";
 import {
   Menu,
   PanelLeft,
@@ -9,20 +9,20 @@ import {
   Bell,
   ChevronDown,
   User,
-  LogOut
-} from 'lucide-react';
+  LogOut,
+} from "lucide-react";
 
-import { useTheme } from '@/contexts/ThemeContext';
-import { formatDate, formatTime } from '@/utils/format';
-import { SiNpm } from 'react-icons/si';
+import { useTheme } from "@/contexts/ThemeContext";
+import { formatDate, formatTime } from "@/utils/format";
+import { SiNpm } from "react-icons/si";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useRouter } from '@tanstack/react-router';
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from "@tanstack/react-router";
 
 interface BrandType {
   title?: string;
@@ -59,9 +59,7 @@ function Clock() {
       <p className="text-gray-900 dark:text-white text-[15px] font-semibold tabular-nums leading-tight tracking-wide">
         {formatTime(now)}
       </p>
-      <p className="text-[#A2A9B6] text-xs font-medium leading-tight">
-        {formatDate(now)}
-      </p>
+      <p className="text-[#A2A9B6] text-xs font-medium leading-tight">{formatDate(now)}</p>
     </div>
   );
 }
@@ -75,7 +73,7 @@ export function TopBar({
   pageTitle,
   brand,
 
-  npmLink = 'https://www.npmjs.com/package/@ragdalion/cli',
+  npmLink = "https://www.npmjs.com/package/@ragdalion/cli",
   showClock = true,
   showNotification = true,
   showThemeToggle = true,
@@ -93,7 +91,12 @@ export function TopBar({
   const title =
     pageTitle ||
     brand?.title ||
-    (pathname === '/' ? 'Dashboard' : pathname.replace('/', '').replace('-', ' ').replace(/\b\w/g, c => c.toUpperCase()));
+    (pathname === "/"
+      ? "Dashboard"
+      : pathname
+          .replace("/", "")
+          .replace("-", " ")
+          .replace(/\b\w/g, (c) => c.toUpperCase()));
 
   return (
     <header className="h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center px-4 lg:px-6 gap-3 shrink-0 shadow-sm transition-colors duration-200">
@@ -115,8 +118,6 @@ export function TopBar({
         )}
       </button>
 
-
-
       <div className="flex-1" />
 
       {showThemeToggle && (
@@ -124,7 +125,7 @@ export function TopBar({
           onClick={toggleTheme}
           className="p-2 mr-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shrink-0"
         >
-          {theme === 'light' ? (
+          {theme === "light" ? (
             <Moon className="w-5 h-5 text-gray-600" />
           ) : (
             <Sun className="w-5 h-5 text-yellow-400" />
@@ -151,13 +152,18 @@ export function TopBar({
                 A
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-sm font-semibold text-gray-900 dark:text-white leading-none mb-1">Admin</span>
+                <span className="text-sm font-semibold text-gray-900 dark:text-white leading-none mb-1">
+                  Admin
+                </span>
                 <span className="text-xs text-gray-400 font-medium leading-none">Super Admin</span>
               </div>
               <ChevronDown className="w-4 h-4 text-gray-400 ml-1" />
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56 p-0 rounded-xl shadow-lg border-gray-100">
+          <DropdownMenuContent
+            align="end"
+            className="w-56 p-0 rounded-xl shadow-lg border-gray-100"
+          >
             <div className="px-4 py-3">
               <p className="text-sm font-medium text-gray-900">admin asep</p>
               <p className="text-xs text-slate-400 font-medium">12345678901011</p>
@@ -171,7 +177,7 @@ export function TopBar({
             </div>
             <DropdownMenuSeparator className="bg-gray-100" />
             <div className="p-1">
-              <DropdownMenuItem 
+              <DropdownMenuItem
                 onClick={handleLogout}
                 className="px-3 py-2.5 text-red-500 cursor-pointer hover:bg-red-50 focus:bg-red-50 focus:text-red-500"
               >

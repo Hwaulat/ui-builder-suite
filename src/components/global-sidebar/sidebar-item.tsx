@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from '@tanstack/react-router';
-import { ChevronDown } from 'lucide-react';
-import type { SidebarItemType } from '@/types/layout';
+import React, { useState } from "react";
+import { Link, useLocation } from "@tanstack/react-router";
+import { ChevronDown } from "lucide-react";
+import type { SidebarItemType } from "@/types/layout";
 
 interface Props {
   item: SidebarItemType;
@@ -20,14 +20,14 @@ const SidebarItem: React.FC<Props> = ({
   const pathname = location.pathname;
   const [open, setOpen] = useState(false);
 
-  if (item.type === 'section') return null;
+  if (item.type === "section") return null;
 
   const Icon = item.icon;
   if (!Icon) return null;
 
   const active = item.path
-    ? item.path === '/'
-      ? pathname === '/'
+    ? item.path === "/"
+      ? pathname === "/"
       : pathname.startsWith(item.path)
     : false;
 
@@ -40,16 +40,14 @@ const SidebarItem: React.FC<Props> = ({
           onClick={() => setOpen(!open)}
           className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm ${
             active
-              ? 'bg-[#1F5AA6]/20 text-white'
-              : 'text-[#7A9BBE] hover:bg-white/5 hover:text-white'
+              ? "bg-[#1F5AA6]/20 text-white"
+              : "text-[#7A9BBE] hover:bg-white/5 hover:text-white"
           }`}
         >
           <Icon className="w-5 h-5" />
           {!collapsed && <span className="flex-1 text-left">{item.label}</span>}
           {!collapsed && (
-            <ChevronDown
-              className={`w-4 h-4 transition ${open ? 'rotate-180' : ''}`}
-            />
+            <ChevronDown className={`w-4 h-4 transition ${open ? "rotate-180" : ""}`} />
           )}
         </button>
 
@@ -60,7 +58,7 @@ const SidebarItem: React.FC<Props> = ({
               return (
                 <Link
                   key={child.path}
-                  to={child.path || '#'}
+                  to={child.path || "#"}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-[#7A9BBE] hover:bg-white/5 hover:text-white"
                   activeProps={{ className: "text-white bg-white/5" }}
                 >
@@ -77,11 +75,9 @@ const SidebarItem: React.FC<Props> = ({
 
   return (
     <Link
-      to={item.path || '#'}
+      to={item.path || "#"}
       className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm ${
-        active
-          ? 'bg-[#1F5AA6] text-white'
-          : 'text-[#7A9BBE] hover:bg-white/5 hover:text-white'
+        active ? "bg-[#1F5AA6] text-white" : "text-[#7A9BBE] hover:bg-white/5 hover:text-white"
       }`}
     >
       <Icon className="w-5 h-5" />
