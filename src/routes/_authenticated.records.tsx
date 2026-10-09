@@ -88,7 +88,7 @@ function ApprovalPage() {
         
         {/* Toolbar */}
         <div className="p-4 border-b border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white dark:bg-slate-800 shrink-0">
-          <div className="w-full sm:w-[320px]">
+          <div className="w-full flex-1">
             <Search 
               placeholder="Search product, lot, or inspector..." 
               value={searchQuery}

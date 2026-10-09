@@ -23,7 +23,8 @@ export type TabVariant =
   | 'bordered'
   | 'solid'
   | 'primary'
-  | 'dynamic';
+  | 'dynamic'
+  | 'outline-primary';
 
 export type TabsOrientation = 'horizontal' | 'vertical';
 
@@ -89,6 +90,13 @@ const variants: Record<TabVariant, VariantConfig> = {
     triggerActive:
       'data-[state=active]:bg-white dark:data-[state=active]:bg-gray-800 data-[state=active]:text-[#1F5AA6] dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-[0px_1px_2px_-1px_#0000001A,0px_1px_3px_0px_#0000001A]',
     triggerSize: 'h-[28px] w-fit py-[6px] px-3',
+  },
+  'outline-primary': {
+    list: 'bg-transparent gap-2 h-auto flex-wrap border-b border-gray-200 dark:border-gray-800 pb-4 w-full',
+    triggerBase:
+      'rounded-full px-4 py-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border border-transparent',
+    triggerActive:
+      'data-[state=active]:border-blue-200 data-[state=active]:bg-white dark:data-[state=active]:bg-gray-800 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:shadow-sm data-[state=active]:hover:bg-white',
   },
   dynamic: {
     listWrapper:

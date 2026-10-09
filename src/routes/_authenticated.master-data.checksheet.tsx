@@ -28,7 +28,7 @@ function MasterDataChecksheetPage() {
     <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
       {/* Toolbar */}
       <div className="p-4 flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-transparent">
-        <div className="w-full">
+        <div className="w-full flex-1">
           <Search 
             placeholder="Search by product no, lot no, line no, auto valve no" 
             className="bg-white"
@@ -108,10 +108,10 @@ function MasterDataChecksheetPage() {
           </div>
         }
         items={[
-          { value: "assembly", label: "Asembly/Finishing", content: mainContent },
+          { value: "assembly", label: "Assembly/Finishing", content: mainContent },
           { value: "tsc", label: "TSC Extruder", content: mainContent },
-          { value: "single", label: "Single Layer", content: mainContent },
-          { value: "double", label: "Double Layer", content: mainContent },
+          { value: "v3", label: "V3", content: mainContent },
+          { value: "v4", label: "V4", content: mainContent },
         ]}
       />
     </div>

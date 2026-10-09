@@ -44,7 +44,7 @@ function RecordsPage() {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between bg-background p-4 rounded-lg border">
-        <div className="flex flex-1 items-center space-x-2 w-full max-w-sm">
+        <div className="flex flex-1 items-center space-x-2 w-full">
           <div className="relative w-full">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input

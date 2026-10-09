@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Edit2, Trash2, Plus, Package, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { Edit2, Trash2, Plus, Layers, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Search } from "@/components/ui/search";
 import { SelectInput } from "@/components/ui/select-input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -16,11 +16,16 @@ export const Route = createFileRoute("/_authenticated/master-data/part")({
 });
 
 const initialData = [
-  { id: 1, partNo: "PT-001", partName: "Cylinder Head" },
-  { id: 2, partNo: "PT-002", partName: "Engine Block" },
-  { id: 3, partNo: "PT-003", partName: "Piston" },
-  { id: 4, partNo: "PT-004", partName: "Crankshaft" },
-  { id: 5, partNo: "PT-005", partName: "Camshaft" },
+  { id: 1, partNo: "918028", partName: "Hydraulic Hose" },
+  { id: 2, partNo: "918028", partName: "Hose Connector" },
+  { id: 3, partNo: "918028", partName: "Hose Clamp" },
+  { id: 4, partNo: "918028", partName: "Rubber Seal" },
+  { id: 5, partNo: "918028", partName: "O-Ring" },
+  { id: 6, partNo: "918028", partName: "Coupling Assembly" },
+  { id: 7, partNo: "918028", partName: "Steel Ferrule" },
+  { id: 8, partNo: "918028", partName: "Adapter Fitting" },
+  { id: 9, partNo: "918028", partName: "Elbow Fitting" },
+  { id: 10, partNo: "918028", partName: "Protective Sleeve" },
 ];
 
 function MasterDataPartPage() {
@@ -89,7 +94,7 @@ function MasterDataPartPage() {
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
         <div className="flex items-center gap-3">
-          <Package className="w-6 h-6 text-gray-800" />
+          <Layers className="w-6 h-6 text-gray-800" />
           <h2 className="text-xl font-bold tracking-tight text-gray-800">Master Data - Part</h2>
         </div>
       </div>
@@ -97,56 +102,48 @@ function MasterDataPartPage() {
       <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
         {/* Toolbar */}
         <div className="p-4 flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-transparent">
-          <div className="w-full">
+          <div className="w-full flex-1">
             <Search 
-              placeholder="Search by part no or part name..." 
+              placeholder="Search by part no & name" 
               className="bg-white"
               value={searchQuery}
               onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
             />
           </div>
           
-          <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
-            <DialogTrigger asChild>
-              <Button 
-                variant="primary" 
-                icon={<Plus className="h-4 w-4" />} 
-                label="Add New Part"
-                className="w-full sm:w-auto bg-[#2b5a9e] hover:bg-[#22487e] text-white rounded-lg px-6 h-10 shrink-0 font-medium"
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto mt-4 sm:mt-0">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-700 whitespace-nowrap">Part No. :</span>
+              <Input 
+                placeholder="Input part no" 
+                className="h-10 w-[140px] border-gray-200 text-sm" 
+                value={newPartNo}
+                onChange={(e) => setNewPartNo(e.target.value)}
               />
-            </DialogTrigger>
-            <DialogContent className="max-w-[1000px] w-[90vw] h-auto p-6">
-              <DialogHeader>
-                <DialogTitle className="text-xl font-bold text-gray-800">Add New Part</DialogTitle>
-              </DialogHeader>
-              <div className="grid gap-6 py-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="partNo">Part No</Label>
-                  <Input 
-                    id="partNo" 
-                    placeholder="Enter part no" 
-                    className="h-10 border-gray-200" 
-                    value={newPartNo}
-                    onChange={(e) => setNewPartNo(e.target.value)}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="partName">Part Name</Label>
-                  <Input 
-                    id="partName" 
-                    placeholder="Enter part name" 
-                    className="h-10 border-gray-200" 
-                    value={newPartName}
-                    onChange={(e) => setNewPartName(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-gray-100">
-                <Button variant="outline" className="px-6 rounded-lg font-medium border-gray-200" label="Cancel" onClick={() => setIsAddOpen(false)} />
-                <Button variant="primary" className="px-6 rounded-lg font-medium bg-[#2b5a9e] hover:bg-[#22487e] text-white" label="Save Part" onClick={handleAddSave} />
-              </div>
-            </DialogContent>
-          </Dialog>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-700 whitespace-nowrap">Part Name :</span>
+              <Input 
+                placeholder="Input part name" 
+                className="h-10 w-[160px] border-gray-200 text-sm" 
+                value={newPartName}
+                onChange={(e) => setNewPartName(e.target.value)}
+              />
+            </div>
+            <Button 
+              variant="outline" 
+              icon={<Plus className="h-4 w-4" />} 
+              label="Add New"
+              className="w-full sm:w-auto bg-[#F1F5F9] hover:bg-[#E2E8F0] border-transparent text-gray-600 rounded-lg px-4 h-10 shrink-0 font-medium"
+              onClick={() => {
+                if (!newPartNo.trim() || !newPartName.trim()) {
+                  toast.error("Please fill both Part No and Part Name");
+                  return;
+                }
+                handleAddSave();
+              }}
+            />
+          </div>
         </div>
 
         {/* Edit Dialog */}
@@ -195,7 +192,7 @@ function MasterDataPartPage() {
               <TableRow className="hover:bg-transparent border-y border-gray-100">
                 <TableHead className="w-[150px] font-semibold text-gray-500 text-xs tracking-wider py-4 pl-6">ACTION</TableHead>
                 <TableHead className="font-semibold text-gray-500 text-xs tracking-wider py-4">
-                  <div className="flex items-center gap-1">PART NO <ChevronDown className="h-3.5 w-3.5 text-blue-500" /></div>
+                  <div className="flex items-center gap-1">PART NO. <ChevronDown className="h-3.5 w-3.5 text-blue-500" /></div>
                 </TableHead>
                 <TableHead className="font-semibold text-gray-500 text-xs tracking-wider py-4">
                   <div className="flex items-center gap-1">PART NAME <ChevronDown className="h-3.5 w-3.5 text-blue-500" /></div>

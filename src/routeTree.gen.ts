@@ -19,6 +19,7 @@ import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated.users'
 import { Route as AuthenticatedDailyProgressIdRouteImport } from './routes/_authenticated.daily-progress_.$id'
 import { Route as AuthenticatedDailyProgressCreateRouteImport } from './routes/_authenticated.daily-progress_.create'
+import { Route as AuthenticatedDailyProgressCreateTscRouteImport } from './routes/_authenticated.daily-progress_.create-tsc'
 import { Route as AuthenticatedMasterDataIndexRouteImport } from './routes/_authenticated.master-data.index'
 import { Route as AuthenticatedMasterDataCategoriesRouteImport } from './routes/_authenticated.master-data.categories'
 import { Route as AuthenticatedMasterDataChecksheetRouteImport } from './routes/_authenticated.master-data.checksheet'
@@ -28,6 +29,7 @@ import { Route as AuthenticatedRecordsIndexRouteImport } from './routes/_authent
 import { Route as AuthenticatedRecordsNewRouteImport } from './routes/_authenticated.records.new'
 import { Route as AuthenticatedRecordsIdRouteImport } from './routes/_authenticated.records_.$id'
 import { Route as AuthenticatedReportsIdRouteImport } from './routes/_authenticated.reports_.$id'
+import { Route as AuthenticatedDailyProgressIdEditRouteImport } from './routes/_authenticated.daily-progress_.$id_.edit'
 import { Route as AuthenticatedRecordsRecordIdApprovalRouteImport } from './routes/_authenticated.records.$recordId.approval'
 
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
@@ -82,6 +84,12 @@ const AuthenticatedDailyProgressCreateRoute =
     path: '/daily-progress/create',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedDailyProgressCreateTscRoute =
+  AuthenticatedDailyProgressCreateTscRouteImport.update({
+    id: '/daily-progress_/create-tsc',
+    path: '/daily-progress/create-tsc',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedMasterDataIndexRoute =
   AuthenticatedMasterDataIndexRouteImport.update({
     id: '/',
@@ -133,6 +141,12 @@ const AuthenticatedReportsIdRoute = AuthenticatedReportsIdRouteImport.update({
   path: '/reports/$id',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedDailyProgressIdEditRoute =
+  AuthenticatedDailyProgressIdEditRouteImport.update({
+    id: '/daily-progress_/$id_/edit',
+    path: '/daily-progress/$id/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedRecordsRecordIdApprovalRoute =
   AuthenticatedRecordsRecordIdApprovalRouteImport.update({
     id: '/$recordId/approval',
@@ -150,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/users': typeof AuthenticatedUsersRoute
   '/daily-progress/$id': typeof AuthenticatedDailyProgressIdRoute
   '/daily-progress/create': typeof AuthenticatedDailyProgressCreateRoute
+  '/daily-progress/create-tsc': typeof AuthenticatedDailyProgressCreateTscRoute
   '/master-data/categories': typeof AuthenticatedMasterDataCategoriesRoute
   '/master-data/checksheet': typeof AuthenticatedMasterDataChecksheetRoute
   '/master-data/equipment': typeof AuthenticatedMasterDataEquipmentRoute
@@ -159,6 +174,7 @@ export interface FileRoutesByFullPath {
   '/reports/$id': typeof AuthenticatedReportsIdRoute
   '/master-data/': typeof AuthenticatedMasterDataIndexRoute
   '/records/': typeof AuthenticatedRecordsIndexRoute
+  '/daily-progress/$id/edit': typeof AuthenticatedDailyProgressIdEditRoute
   '/records/$recordId/approval': typeof AuthenticatedRecordsRecordIdApprovalRoute
 }
 export interface FileRoutesByTo {
@@ -169,6 +185,7 @@ export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/daily-progress/$id': typeof AuthenticatedDailyProgressIdRoute
   '/daily-progress/create': typeof AuthenticatedDailyProgressCreateRoute
+  '/daily-progress/create-tsc': typeof AuthenticatedDailyProgressCreateTscRoute
   '/master-data/categories': typeof AuthenticatedMasterDataCategoriesRoute
   '/master-data/checksheet': typeof AuthenticatedMasterDataChecksheetRoute
   '/master-data/equipment': typeof AuthenticatedMasterDataEquipmentRoute
@@ -178,6 +195,7 @@ export interface FileRoutesByTo {
   '/reports/$id': typeof AuthenticatedReportsIdRoute
   '/master-data': typeof AuthenticatedMasterDataIndexRoute
   '/records': typeof AuthenticatedRecordsIndexRoute
+  '/daily-progress/$id/edit': typeof AuthenticatedDailyProgressIdEditRoute
   '/records/$recordId/approval': typeof AuthenticatedRecordsRecordIdApprovalRoute
 }
 export interface FileRoutesById {
@@ -192,6 +210,7 @@ export interface FileRoutesById {
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/daily-progress_/$id': typeof AuthenticatedDailyProgressIdRoute
   '/_authenticated/daily-progress_/create': typeof AuthenticatedDailyProgressCreateRoute
+  '/_authenticated/daily-progress_/create-tsc': typeof AuthenticatedDailyProgressCreateTscRoute
   '/_authenticated/master-data/categories': typeof AuthenticatedMasterDataCategoriesRoute
   '/_authenticated/master-data/checksheet': typeof AuthenticatedMasterDataChecksheetRoute
   '/_authenticated/master-data/equipment': typeof AuthenticatedMasterDataEquipmentRoute
@@ -201,6 +220,7 @@ export interface FileRoutesById {
   '/_authenticated/reports_/$id': typeof AuthenticatedReportsIdRoute
   '/_authenticated/master-data/': typeof AuthenticatedMasterDataIndexRoute
   '/_authenticated/records/': typeof AuthenticatedRecordsIndexRoute
+  '/_authenticated/daily-progress_/$id_/edit': typeof AuthenticatedDailyProgressIdEditRoute
   '/_authenticated/records/$recordId/approval': typeof AuthenticatedRecordsRecordIdApprovalRoute
 }
 export interface FileRouteTypes {
@@ -215,6 +235,7 @@ export interface FileRouteTypes {
     | '/users'
     | '/daily-progress/$id'
     | '/daily-progress/create'
+    | '/daily-progress/create-tsc'
     | '/master-data/categories'
     | '/master-data/checksheet'
     | '/master-data/equipment'
@@ -224,6 +245,7 @@ export interface FileRouteTypes {
     | '/reports/$id'
     | '/master-data/'
     | '/records/'
+    | '/daily-progress/$id/edit'
     | '/records/$recordId/approval'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -234,6 +256,7 @@ export interface FileRouteTypes {
     | '/'
     | '/daily-progress/$id'
     | '/daily-progress/create'
+    | '/daily-progress/create-tsc'
     | '/master-data/categories'
     | '/master-data/checksheet'
     | '/master-data/equipment'
@@ -243,6 +266,7 @@ export interface FileRouteTypes {
     | '/reports/$id'
     | '/master-data'
     | '/records'
+    | '/daily-progress/$id/edit'
     | '/records/$recordId/approval'
   id:
     | '__root__'
@@ -256,6 +280,7 @@ export interface FileRouteTypes {
     | '/_authenticated/'
     | '/_authenticated/daily-progress_/$id'
     | '/_authenticated/daily-progress_/create'
+    | '/_authenticated/daily-progress_/create-tsc'
     | '/_authenticated/master-data/categories'
     | '/_authenticated/master-data/checksheet'
     | '/_authenticated/master-data/equipment'
@@ -265,6 +290,7 @@ export interface FileRouteTypes {
     | '/_authenticated/reports_/$id'
     | '/_authenticated/master-data/'
     | '/_authenticated/records/'
+    | '/_authenticated/daily-progress_/$id_/edit'
     | '/_authenticated/records/$recordId/approval'
   fileRoutesById: FileRoutesById
 }
@@ -345,6 +371,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDailyProgressCreateRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/daily-progress_/create-tsc': {
+      id: '/_authenticated/daily-progress_/create-tsc'
+      path: '/daily-progress/create-tsc'
+      fullPath: '/daily-progress/create-tsc'
+      preLoaderRoute: typeof AuthenticatedDailyProgressCreateTscRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/master-data/': {
       id: '/_authenticated/master-data/'
       path: '/'
@@ -408,6 +441,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReportsIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/daily-progress_/$id_/edit': {
+      id: '/_authenticated/daily-progress_/$id_/edit'
+      path: '/daily-progress/$id/edit'
+      fullPath: '/daily-progress/$id/edit'
+      preLoaderRoute: typeof AuthenticatedDailyProgressIdEditRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/records/$recordId/approval': {
       id: '/_authenticated/records/$recordId/approval'
       path: '/$recordId/approval'
@@ -468,8 +508,10 @@ interface AuthenticatedRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedDailyProgressIdRoute: typeof AuthenticatedDailyProgressIdRoute
   AuthenticatedDailyProgressCreateRoute: typeof AuthenticatedDailyProgressCreateRoute
+  AuthenticatedDailyProgressCreateTscRoute: typeof AuthenticatedDailyProgressCreateTscRoute
   AuthenticatedRecordsIdRoute: typeof AuthenticatedRecordsIdRoute
   AuthenticatedReportsIdRoute: typeof AuthenticatedReportsIdRoute
+  AuthenticatedDailyProgressIdEditRoute: typeof AuthenticatedDailyProgressIdEditRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -481,8 +523,11 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedDailyProgressIdRoute: AuthenticatedDailyProgressIdRoute,
   AuthenticatedDailyProgressCreateRoute: AuthenticatedDailyProgressCreateRoute,
+  AuthenticatedDailyProgressCreateTscRoute:
+    AuthenticatedDailyProgressCreateTscRoute,
   AuthenticatedRecordsIdRoute: AuthenticatedRecordsIdRoute,
   AuthenticatedReportsIdRoute: AuthenticatedReportsIdRoute,
+  AuthenticatedDailyProgressIdEditRoute: AuthenticatedDailyProgressIdEditRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(

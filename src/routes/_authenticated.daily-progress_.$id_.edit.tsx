@@ -4,12 +4,12 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ListTodo, Calendar as CalendarIcon, ChevronLeft } from "lucide-react";
+import { Plus, Calendar as CalendarIcon, ChevronLeft } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Tabs } from "@/components/ui/tablist";
 
-export const Route = createFileRoute("/_authenticated/daily-progress_/create")({
-  component: CreateChecksheetPage,
+export const Route = createFileRoute("/_authenticated/daily-progress_/$id_/edit")({
+  component: EditChecksheetPage,
 });
 
 // OK/NG dropdown with green/red styling based on value
@@ -33,8 +33,10 @@ function OkNgSelect({ value, onChange }: { value: string; onChange: (v: string) 
   );
 }
 
-function CreateChecksheetPage() {
-  // Top fields — pre-filled for active state
+function EditChecksheetPage() {
+  const { id } = Route.useParams();
+
+  // Top fields — pre-filled for edit
   const [productNo, setProductNo] = useState("IDC-935B (01-272B)");
   const [lotNo, setLotNo] = useState("S870");
   const [lineNo, setLineNo] = useState("-");
@@ -93,8 +95,8 @@ function CreateChecksheetPage() {
   const [isPosNg, setIsPosNg] = useState("");
   const [isPosTotalNg, setIsPosTotalNg] = useState("");
 
-  const handleSubmit = () => {
-    console.log("Checksheet Submitted");
+  const handleUpdate = () => {
+    console.log("Checksheet Updated", { id });
   };
 
   const tabItems = [
@@ -115,12 +117,15 @@ function CreateChecksheetPage() {
             </Link>
           </Button>
           <div className="flex items-center gap-2">
-            <ListTodo className="w-5 h-5" />
-            <h2>Daily Progress - Create New Checksheet</h2>
+            <Plus className="w-5 h-5" />
+            <h2>
+              Edit Checksheet{" "}
+              <span className="text-blue-600 dark:text-blue-400 italic font-bold">(Asembly/Finishing)</span>
+            </h2>
           </div>
         </div>
-        <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-10 rounded-lg shadow-sm">
-          Submit
+        <Button onClick={handleUpdate} className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-10 rounded-lg shadow-sm">
+          Update
         </Button>
       </div>
 
@@ -274,7 +279,7 @@ function CreateChecksheetPage() {
                   <Input
                     value={mjNgItem}
                     onChange={(e) => setMjNgItem(e.target.value)}
-                    placeholder="OK/NG"
+                    placeholder="Input item ng"
                     fieldClassName="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
                   />
                 </td>
@@ -298,7 +303,7 @@ function CreateChecksheetPage() {
                   <Input
                     value={takNgItem}
                     onChange={(e) => setTakNgItem(e.target.value)}
-                    placeholder="OK/NG"
+                    placeholder="Input item ng"
                     fieldClassName="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
                   />
                 </td>
@@ -332,7 +337,7 @@ function CreateChecksheetPage() {
                   <Input
                     value={vsColorNg}
                     onChange={(e) => setVsColorNg(e.target.value)}
-                    placeholder="OK/NG"
+                    placeholder="Input item ng"
                     fieldClassName="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
                   />
                 </td>
@@ -376,7 +381,7 @@ function CreateChecksheetPage() {
                   <Input
                     value={vsSizeNg}
                     onChange={(e) => setVsSizeNg(e.target.value)}
-                    placeholder="OK/NG"
+                    placeholder="Input item ng"
                     fieldClassName="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
                   />
                 </td>
@@ -401,7 +406,7 @@ function CreateChecksheetPage() {
                   <Input
                     value={vsPosNg}
                     onChange={(e) => setVsPosNg(e.target.value)}
-                    placeholder="OK/NG"
+                    placeholder="Input item ng"
                     fieldClassName="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
                   />
                 </td>
@@ -441,7 +446,7 @@ function CreateChecksheetPage() {
                   <Input
                     value={isColorNg}
                     onChange={(e) => setIsColorNg(e.target.value)}
-                    placeholder="OK/NG"
+                    placeholder="Input item ng"
                     fieldClassName="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
                   />
                 </td>
@@ -485,7 +490,7 @@ function CreateChecksheetPage() {
                   <Input
                     value={isSizeNg}
                     onChange={(e) => setIsSizeNg(e.target.value)}
-                    placeholder="OK/NG"
+                    placeholder="Input item ng"
                     fieldClassName="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
                   />
                 </td>
@@ -510,7 +515,7 @@ function CreateChecksheetPage() {
                   <Input
                     value={isPosNg}
                     onChange={(e) => setIsPosNg(e.target.value)}
-                    placeholder="OK/NG"
+                    placeholder="Input item ng"
                     fieldClassName="h-9 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
                   />
                 </td>
