@@ -53,7 +53,7 @@ function ApprovalPage() {
     <div className="flex-1 space-y-6 max-w-4xl mx-auto w-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <Button variant="outline" size="icon" asChild>
+          <Button variant="outline" size="iconSm" asChild>
             <Link to="/records">
               <ChevronLeft className="h-4 w-4" />
             </Link>

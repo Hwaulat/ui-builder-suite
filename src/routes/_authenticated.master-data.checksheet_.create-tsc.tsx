@@ -72,7 +72,7 @@ function CreateTscChecksheetPage() {
         {/* Tabs */}
         <div className="pt-2 overflow-x-auto pb-2 scrollbar-hide">
           <Tabs 
-            variant="secondary"
+            variant="primary"
             defaultValue="inner"
             items={[
               { value: "material", label: "Material Preparation", content: null },

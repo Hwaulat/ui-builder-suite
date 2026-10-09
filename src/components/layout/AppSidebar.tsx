@@ -112,7 +112,7 @@ export function AppSidebar() {
                   icon: item.icon,
                   type: 'item',
                   children: item.children
-                }}
+                } as any}
                 collapsed={false}
                 isMobile={false}
                 canAccess={() => true}

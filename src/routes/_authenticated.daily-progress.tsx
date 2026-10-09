@@ -42,8 +42,8 @@ function generateMockData() {
       lineNo: "-",
       autoValveNo: "-",
       inspectedBy: "Hasan",
-      checked: statuses[statusIdx].checked,
-      approved: statuses[statusIdx].approved,
+      checked: statuses[statusIdx]?.checked ?? "",
+      approved: statuses[statusIdx]?.approved ?? "",
     });
   }
   return data;
@@ -68,10 +68,10 @@ function generateMockDataOther() {
       partNoName: "00912 - Part Name",
       lotNo: "S702",
       inspectedBy: "Hasan",
-      engChecked: st.engChecked,
-      engApproved: st.engApproved,
-      manChecked: st.manChecked,
-      manApproved: st.manApproved,
+      engChecked: st?.engChecked ?? "",
+      engApproved: st?.engApproved ?? "",
+      manChecked: st?.manChecked ?? "",
+      manApproved: st?.manApproved ?? "",
     });
   }
   return data;

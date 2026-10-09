@@ -54,7 +54,7 @@ function NewRecordPage() {
   return (
     <div className="flex-1 space-y-6 max-w-3xl mx-auto w-full">
       <div className="flex items-center space-x-4">
-        <Button variant="outline" size="icon" asChild>
+        <Button variant="outline" size="iconSm" asChild>
           <Link to="/records">
             <ChevronLeft className="h-4 w-4" />
           </Link>
@@ -98,7 +98,7 @@ function NewRecordPage() {
 
       <Card className="mt-8 border-t-4 border-t-primary">
         <CardHeader>
-          <CardTitle>{STEPS[currentStep - 1].title}</CardTitle>
+          <CardTitle>{STEPS[currentStep - 1]?.title}</CardTitle>
           <CardDescription>
             {currentStep === 1 && "Masukkan informasi dasar untuk record ini."}
             {currentStep === 2 && "Lengkapi detail dan angka yang dibutuhkan."}

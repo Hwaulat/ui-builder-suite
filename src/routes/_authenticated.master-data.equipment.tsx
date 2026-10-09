@@ -152,7 +152,7 @@ function MasterDataEquipmentPage() {
   // Add State
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [newEquipmentName, setNewEquipmentName] = useState("");
-  const [newStandardType, setNewStandardType] = useState(standardTypeOptions[0].value);
+  const [newStandardType, setNewStandardType] = useState(standardTypeOptions[0]?.value ?? "");
 
   // Edit State
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -180,7 +180,7 @@ function MasterDataEquipmentPage() {
     toast.success("Equipment added successfully");
     setIsAddOpen(false);
     setNewEquipmentName("");
-    setNewStandardType(standardTypeOptions[0].value);
+    setNewStandardType(standardTypeOptions[0]?.value ?? "");
   };
 
   const openEdit = (equipment: typeof initialData[0]) => {
@@ -269,7 +269,7 @@ function MasterDataEquipmentPage() {
                 {renderStandardTypePreview(newStandardType)}
               </div>
               <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-2">
-                <Button variant="outline" className="px-6 rounded-lg font-semibold border-gray-200 text-gray-700" label="Cancel" onClick={() => { setIsAddOpen(false); setNewEquipmentName(""); setNewStandardType(standardTypeOptions[0].value); }} />
+                <Button variant="outline" className="px-6 rounded-lg font-semibold border-gray-200 text-gray-700" label="Cancel" onClick={() => { setIsAddOpen(false); setNewEquipmentName(""); setNewStandardType(standardTypeOptions[0]?.value ?? ""); }} />
                 <Button variant="primary" className="px-6 rounded-lg font-semibold bg-[#2b5a9e] hover:bg-[#22487e] text-white" label="Save" onClick={handleAddSave} />
               </div>
             </DialogContent>

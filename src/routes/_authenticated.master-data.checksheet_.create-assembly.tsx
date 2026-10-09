@@ -67,7 +67,7 @@ function CreateAssemblyChecksheetPage() {
         {/* Tabs */}
         <div className="pt-2">
           <Tabs 
-            variant="secondary"
+            variant="primary"
             defaultValue="marking"
             items={[
               { value: "marking", label: "Marking", content: null },

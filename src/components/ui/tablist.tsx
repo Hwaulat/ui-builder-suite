@@ -129,7 +129,7 @@ export function Tabs({
     value !== undefined ? { value, onValueChange } : undefined;
   const uncontrolledProps =
     value === undefined
-      ? { defaultValue: defaultValue ?? items[0]?.value }
+      ? { defaultValue: (defaultValue ?? items[0]?.value) as string }
       : undefined;
 
   const tabsList = (

@@ -13,9 +13,9 @@ type SearchParams = {
 }
 
 export const Route = createFileRoute("/_authenticated/daily-progress_/create-tsc")({
-  validateSearch: (search: Record<string, unknown>): SearchParams => {
+  validateSearch: (search: Record<string, unknown>) => {
     return {
-      type: (search.type as string) || "TSC Extruder",
+      type: (search['type'] as string) || "TSC Extruder",
     }
   },
   component: CreateTscChecksheetPage,
@@ -37,15 +37,15 @@ function CompoundRowGroup({ label, results }: { label: string; results: { [key: 
             <div className="flex items-center gap-2 flex-wrap xl:flex-nowrap">
               <div className="flex items-center gap-1.5 flex-1 min-w-[80px]">
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Compound:</span>
-                <Input defaultValue={results.compound} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[50px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
+                <Input defaultValue={results['compound']} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[50px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
               </div>
               <div className="flex items-center gap-1.5 flex-1 min-w-[60px]">
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Tag:</span>
-                <Input defaultValue={results.tag} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[40px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
+                <Input defaultValue={results['tag']} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[40px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
               </div>
               <div className="flex items-center gap-1.5 flex-1 min-w-[60px]">
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Pcs:</span>
-                <Input defaultValue={results.pcs} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[40px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
+                <Input defaultValue={results['pcs']} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[40px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
               </div>
             </div>
           </td>
@@ -60,15 +60,15 @@ function CompoundRowGroup({ label, results }: { label: string; results: { [key: 
             <div className="flex items-center gap-2 flex-wrap xl:flex-nowrap">
               <div className="flex items-center gap-1.5 flex-1 min-w-[80px]">
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Compound:</span>
-                <Input defaultValue={results.compound} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[50px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
+                <Input defaultValue={results['compound']} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[50px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
               </div>
               <div className="flex items-center gap-1.5 flex-1 min-w-[60px]">
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Tag:</span>
-                <Input defaultValue={results.tag} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[40px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
+                <Input defaultValue={results['tag']} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[40px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
               </div>
               <div className="flex items-center gap-1.5 flex-1 min-w-[60px]">
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Pcs:</span>
-                <Input defaultValue={results.pcs} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[40px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
+                <Input defaultValue={results['pcs']} placeholder="Input" className="h-8 text-xs px-2 w-full min-w-[40px] shadow-none bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 rounded-lg text-center" />
               </div>
             </div>
           </td>
@@ -155,7 +155,7 @@ function CreateTscChecksheetPage() {
         <div className="pt-2">
           <Tabs 
             variant="primary"
-            defaultValue={tabs[0]}
+            defaultValue={tabs[0] || "Visual"}
             items={tabs.map((tab) => ({
               value: tab,
               label: tab,

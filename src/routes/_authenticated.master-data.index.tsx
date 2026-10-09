@@ -68,10 +68,10 @@ function MasterDataPage() {
                     <TableCell>{cat.name}</TableCell>
                     <TableCell>{cat.description}</TableCell>
                     <TableCell className="text-right">
-                      <Button variant="ghost" size="icon">
+                      <Button variant="ghost" size="iconSm">
                         <Edit2 className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="icon" className="text-destructive">
+                      <Button variant="ghost" size="iconSm" className="text-destructive">
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </TableCell>
@@ -108,10 +108,10 @@ function MasterDataPage() {
                     <TableCell>{role.name}</TableCell>
                     <TableCell>{role.accessLevel}</TableCell>
                     <TableCell className="text-right">
-                      <Button variant="ghost" size="icon">
+                      <Button variant="ghost" size="iconSm">
                         <Edit2 className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="icon" className="text-destructive">
+                      <Button variant="ghost" size="iconSm" className="text-destructive">
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </TableCell>
