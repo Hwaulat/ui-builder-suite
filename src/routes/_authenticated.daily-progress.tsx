@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "@/components/ui/search";
-import { Eye, Edit2, Trash2, Plus, ListTodo, ChevronDown, CheckCircle2, XCircle, Asterisk, CalendarDays } from "lucide-react";
+import { Eye, Edit2, Trash2, Plus, ListTodo, ChevronDown, CheckCircle2, XCircle, Asterisk, CalendarDays, X } from "lucide-react";
 import { Tabs } from "@/components/ui/tablist";
 import PaginationDefault from "@/components/ui/pagination";
 
@@ -51,9 +51,37 @@ function generateMockData() {
 
 const mockData = generateMockData();
 
+function generateMockDataOther() {
+  const statuses: Array<{ engChecked: string; engApproved: string; manChecked: string; manApproved: string }> = [
+    { engChecked: "ok", engApproved: "ok", manChecked: "ok", manApproved: "ok" },
+    { engChecked: "ng", engApproved: "ng", manChecked: "ng", manApproved: "ng" },
+    { engChecked: "ok", engApproved: "ng", manChecked: "waiting", manApproved: "waiting" },
+    { engChecked: "waiting", engApproved: "waiting", manChecked: "waiting", manApproved: "waiting" },
+  ];
+
+  const data = [];
+  for (let i = 0; i < 40; i++) {
+    const st = statuses[i % statuses.length];
+    data.push({
+      id: i + 1,
+      date: "10 August 2026, 10:00",
+      partNoName: "00912 - Part Name",
+      lotNo: "S702",
+      inspectedBy: "Hasan",
+      engChecked: st.engChecked,
+      engApproved: st.engApproved,
+      manChecked: st.manChecked,
+      manApproved: st.manApproved,
+    });
+  }
+  return data;
+}
+
+const mockDataOther = generateMockDataOther();
+
 function StatusIcon({ status }: { status: string }) {
   if (status === "ok") return <CheckCircle2 className="w-6 h-6 text-emerald-500 mx-auto" />;
-  if (status === "ng") return <XCircle className="w-6 h-6 text-red-500 mx-auto" />;
+  if (status === "ng") return <X className="w-6 h-6 text-red-500 mx-auto" />;
   return (
     <svg className="w-6 h-6 mx-auto" viewBox="0 0 24 24" fill="none">
       <circle cx="12" cy="12" r="3" fill="#f59e0b" />
@@ -126,7 +154,21 @@ function DailyProgressPage() {
     return filteredData.slice(start, start + itemsPerPage);
   }, [filteredData, currentPage, itemsPerPage]);
 
-  const mainContent = (
+  const otherFilteredData = useMemo(() => {
+    return mockDataOther.filter((row) => {
+      return row.partNoName.toLowerCase().includes(searchQuery.toLowerCase()) || 
+             row.lotNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
+             row.inspectedBy.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+  }, [searchQuery]);
+
+  const otherTotalPages = Math.ceil(otherFilteredData.length / itemsPerPage);
+  const otherPaginatedData = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return otherFilteredData.slice(start, start + itemsPerPage);
+  }, [otherFilteredData, currentPage, itemsPerPage]);
+
+  const assemblyContent = (
     <Card className="flex-1 flex flex-col shadow-sm border-slate-100 dark:border-slate-700/50 rounded-xl overflow-hidden bg-white dark:bg-slate-800 transition-colors">
         {/* Toolbar */}
         <div className="p-4 border-b border-slate-100 dark:border-slate-700/50 flex flex-col lg:flex-row items-center justify-between gap-4 bg-white dark:bg-slate-800 shrink-0">
@@ -287,6 +329,148 @@ function DailyProgressPage() {
       </Card>
   );
 
+  const renderOtherContent = (type: string) => (
+    <Card className="flex-1 flex flex-col shadow-sm border-slate-100 dark:border-slate-700/50 rounded-xl overflow-hidden bg-white dark:bg-slate-800 transition-colors">
+        {/* Toolbar */}
+        <div className="p-4 border-b border-slate-100 dark:border-slate-700/50 flex flex-col lg:flex-row items-center justify-between gap-4 bg-white dark:bg-slate-800 shrink-0">
+          <div className="w-full flex-1">
+            <Search 
+              placeholder="Search by part no, name, lot no & inspected by" 
+              value={searchQuery}
+              onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+              className="dark:bg-slate-900 dark:border-slate-700"
+            />
+          </div>
+          <div className="flex items-center gap-3 w-full lg:w-auto flex-wrap">
+            {/* Date Range */}
+            <button className="flex items-center gap-2 px-3 h-9 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+              <CalendarDays className="w-4 h-4 text-slate-400" />
+              <span className="whitespace-nowrap font-medium">10 Aug 2026 - 15 Aug 2026</span>
+            </button>
+
+            {/* Create New Checksheet */}
+            <Link to="/daily-progress/create-tsc" search={{ type }} className="w-full sm:w-auto">
+              <Button className="h-9 px-4 bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto justify-start sm:justify-center font-medium rounded-lg shadow-sm">
+                <Plus className="w-4 h-4 mr-2" />
+                Create New Checksheet
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Table */}
+        <div className="flex-1 overflow-auto">
+          <Table>
+            <TableHeader className="bg-white dark:bg-slate-800 sticky top-0 z-10 shadow-[0_1px_0_0_#f1f5f9] dark:shadow-[0_1px_0_0_#334155]">
+              <TableRow className="border-none hover:bg-transparent">
+                <TableHead rowSpan={2} className="w-[140px] font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 text-center align-middle border-b border-slate-100 dark:border-slate-700/50">
+                  ACTION
+                </TableHead>
+                <TableHead rowSpan={2} className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 align-middle border-b border-slate-100 dark:border-slate-700/50">
+                  <div className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer w-fit">
+                    INSPECTION DATE <ChevronDown className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
+                  </div>
+                </TableHead>
+                <TableHead rowSpan={2} className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 align-middle border-b border-slate-100 dark:border-slate-700/50">
+                  <div className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer w-fit">
+                    PART NO - NAME <ChevronDown className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
+                  </div>
+                </TableHead>
+                <TableHead rowSpan={2} className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 align-middle border-b border-slate-100 dark:border-slate-700/50">
+                  <div className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer w-fit">
+                    LOT NO. <ChevronDown className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
+                  </div>
+                </TableHead>
+                <TableHead rowSpan={2} className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 align-middle border-b border-slate-100 dark:border-slate-700/50">
+                  <div className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer w-fit">
+                    INSPECTED BY <ChevronDown className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
+                  </div>
+                </TableHead>
+                <TableHead colSpan={2} className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 text-center border-b border-slate-100 dark:border-slate-700/50">
+                  DEPT. ENGINEERING
+                </TableHead>
+                <TableHead colSpan={2} className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 text-center border-b border-slate-100 dark:border-slate-700/50">
+                  DEPT. MANUFACTURE
+                </TableHead>
+              </TableRow>
+              <TableRow className="border-none hover:bg-transparent">
+                <TableHead className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 text-center border-b border-slate-100 dark:border-slate-700/50">
+                  <div className="flex items-center justify-center gap-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer">
+                    CHECKED BY <ChevronDown className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
+                  </div>
+                </TableHead>
+                <TableHead className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 text-center border-b border-slate-100 dark:border-slate-700/50">
+                  <div className="flex items-center justify-center gap-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer">
+                    APPROVED BY <ChevronDown className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
+                  </div>
+                </TableHead>
+                <TableHead className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 text-center border-b border-slate-100 dark:border-slate-700/50">
+                  <div className="flex items-center justify-center gap-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer">
+                    CHECKED BY <ChevronDown className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
+                  </div>
+                </TableHead>
+                <TableHead className="font-semibold text-xs text-slate-500 dark:text-slate-400 uppercase py-2 text-center border-b border-slate-100 dark:border-slate-700/50">
+                  <div className="flex items-center justify-center gap-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer">
+                    APPROVED BY <ChevronDown className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600" />
+                  </div>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {otherPaginatedData.length > 0 ? otherPaginatedData.map((row) => (
+                <TableRow key={row.id} className="border-b border-slate-50 dark:border-slate-700/30 hover:bg-slate-50/50 dark:hover:bg-slate-700/20 group transition-colors">
+                  <TableCell className="py-3 px-2">
+                    <div className="flex items-center justify-center gap-1.5">
+                      <Link to="/daily-progress/$id" params={{ id: row.id.toString() }}>
+                        <Button variant="iconView" title="View"><Eye /></Button>
+                      </Link>
+                      <Link to="/daily-progress/$id/edit" params={{ id: row.id.toString() }}>
+                        <Button variant="iconEdit" title="Edit"><Edit2 /></Button>
+                      </Link>
+                      <Button variant="iconDelete" title="Delete"><Trash2 /></Button>
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-slate-700 dark:text-slate-300 font-medium text-[13px] whitespace-nowrap">{row.date}</TableCell>
+                  <TableCell className="text-slate-600 dark:text-slate-400 text-[13px]">{row.partNoName}</TableCell>
+                  <TableCell className="text-slate-600 dark:text-slate-400 text-[13px]">{row.lotNo}</TableCell>
+                  <TableCell className="text-slate-600 dark:text-slate-400 text-[13px]">{row.inspectedBy}</TableCell>
+                  <TableCell className="text-center border-l border-slate-100 dark:border-slate-700/50">
+                    <div className="flex justify-center"><StatusIcon status={row.engChecked} /></div>
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <div className="flex justify-center"><StatusIcon status={row.engApproved} /></div>
+                  </TableCell>
+                  <TableCell className="text-center border-l border-slate-100 dark:border-slate-700/50">
+                    <div className="flex justify-center"><StatusIcon status={row.manChecked} /></div>
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <div className="flex justify-center"><StatusIcon status={row.manApproved} /></div>
+                  </TableCell>
+                </TableRow>
+              )) : (
+                <TableRow>
+                  <TableCell colSpan={9} className="py-8 text-center text-slate-500 dark:text-slate-400">
+                    No records found matching your filters.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+
+        {/* Footer Pagination */}
+        <PaginationDefault 
+          currentPage={currentPage}
+          totalPages={otherTotalPages}
+          rowsPerPage={itemsPerPage}
+          totalItems={otherFilteredData.length}
+          onPageChange={setCurrentPage}
+          onRowsPerPageChange={(val) => { setItemsPerPage(val); setCurrentPage(1); }}
+          spacing="gap-4"
+        />
+      </Card>
+  );
+
   return (
     <div className="flex-1 space-y-4 p-4 lg:p-6 bg-[#f8fafc] dark:bg-slate-900 h-full min-h-screen">
       <Tabs 
@@ -300,10 +484,10 @@ function DailyProgressPage() {
           </div>
         }
         items={[
-          { value: "Assembly/Finishing", label: "Assembly/Finishing", content: mainContent },
-          { value: "TSC Extruder", label: "TSC Extruder", content: mainContent },
-          { value: "V3", label: "V3", content: mainContent },
-          { value: "V4", label: "V4", content: mainContent },
+          { value: "Assembly/Finishing", label: "Assembly/Finishing", content: assemblyContent },
+          { value: "TSC Extruder", label: "TSC Extruder", content: renderOtherContent("tsc") },
+          { value: "V3", label: "V3", content: renderOtherContent("v3") },
+          { value: "V4", label: "V4", content: renderOtherContent("v4") },
         ]}
       />
     </div>
