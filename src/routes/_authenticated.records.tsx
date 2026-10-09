@@ -9,6 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { CheckSquare, Eye, ChevronDown, Calendar as CalendarIcon, Check, X, Loader2, ChevronLeft, ChevronRight, CheckCircle2 } from "lucide-react";
 import { cn } from "@/utils/cn";
 import PaginationDefault from "@/components/ui/pagination";
+import { Tabs } from "@/components/ui/tablist";
 
 export const Route = createFileRoute("/_authenticated/records")({
   component: ApprovalPage,
@@ -55,6 +56,7 @@ function ApprovalPage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [activeTab, setActiveTab] = useState("Assembly/Finishing");
 
   const filteredData = useMemo(() => {
     return mockData.filter((row) => {
@@ -73,17 +75,7 @@ function ApprovalPage() {
     return filteredData.slice(start, start + itemsPerPage);
   }, [filteredData, currentPage, itemsPerPage]);
 
-  return (
-    <div className="flex-1 flex flex-col space-y-4 p-4 lg:p-6 bg-slate-50 dark:bg-slate-900 h-full overflow-hidden transition-colors">
-      
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-2 shrink-0">
-        <div className="flex items-center gap-2 text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
-          <CheckSquare className="w-5 h-5" />
-          <h2>Approval</h2>
-        </div>
-      </div>
-
+  const mainContent = (
       <Card className="flex-1 flex flex-col shadow-sm border-slate-100 dark:border-slate-700/50 rounded-xl overflow-hidden bg-white dark:bg-slate-800 transition-colors">
         
         {/* Toolbar */}
@@ -212,17 +204,39 @@ function ApprovalPage() {
         </div>
 
         {/* Footer Pagination */}
-        <PaginationDefault 
-          currentPage={currentPage}
-          totalPages={totalPages}
-          rowsPerPage={itemsPerPage}
-          totalItems={filteredData.length}
-          onPageChange={setCurrentPage}
-          onRowsPerPageChange={(val) => { setItemsPerPage(val); setCurrentPage(1); }}
-          spacing="gap-4"
-        />
-
+        <div className="p-4 border-t border-slate-100 dark:border-slate-700/50 bg-white dark:bg-slate-800 shrink-0">
+          <PaginationDefault 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            rowsPerPage={itemsPerPage}
+            totalItems={filteredData.length}
+            onPageChange={setCurrentPage}
+            onRowsPerPageChange={(val) => { setItemsPerPage(val); setCurrentPage(1); }}
+            spacing="gap-4"
+          />
+        </div>
       </Card>
+  );
+
+  return (
+    <div className="flex-1 space-y-4 p-4 lg:p-6 bg-[#f8fafc] dark:bg-slate-900 h-full min-h-screen">
+      <Tabs 
+        variant="primary"
+        value={activeTab}
+        onValueChange={setActiveTab}
+        leftHeader={
+          <div className="flex items-center gap-2 text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 pb-2">
+            <CheckSquare className="w-5 h-5 text-slate-800 dark:text-slate-100" />
+            <h2 className="text-slate-800 dark:text-slate-100">Approval</h2>
+          </div>
+        }
+        items={[
+          { value: "Assembly/Finishing", label: "Assembly/Finishing", content: mainContent },
+          { value: "TSC Extruder", label: "TSC Extruder", content: mainContent },
+          { value: "V3", label: "V3", content: mainContent },
+          { value: "V4", label: "V4", content: mainContent },
+        ]}
+      />
     </div>
   );
 }

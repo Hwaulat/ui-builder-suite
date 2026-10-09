@@ -30,6 +30,8 @@ import { Route as AuthenticatedRecordsNewRouteImport } from './routes/_authentic
 import { Route as AuthenticatedRecordsIdRouteImport } from './routes/_authenticated.records_.$id'
 import { Route as AuthenticatedReportsIdRouteImport } from './routes/_authenticated.reports_.$id'
 import { Route as AuthenticatedDailyProgressIdEditRouteImport } from './routes/_authenticated.daily-progress_.$id_.edit'
+import { Route as AuthenticatedMasterDataChecksheetCreateAssemblyRouteImport } from './routes/_authenticated.master-data.checksheet_.create-assembly'
+import { Route as AuthenticatedMasterDataChecksheetCreateTscRouteImport } from './routes/_authenticated.master-data.checksheet_.create-tsc'
 import { Route as AuthenticatedRecordsRecordIdApprovalRouteImport } from './routes/_authenticated.records.$recordId.approval'
 
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
@@ -147,6 +149,18 @@ const AuthenticatedDailyProgressIdEditRoute =
     path: '/daily-progress/$id/edit',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedMasterDataChecksheetCreateAssemblyRoute =
+  AuthenticatedMasterDataChecksheetCreateAssemblyRouteImport.update({
+    id: '/checksheet_/create-assembly',
+    path: '/checksheet/create-assembly',
+    getParentRoute: () => AuthenticatedMasterDataRoute,
+  } as any)
+const AuthenticatedMasterDataChecksheetCreateTscRoute =
+  AuthenticatedMasterDataChecksheetCreateTscRouteImport.update({
+    id: '/checksheet_/create-tsc',
+    path: '/checksheet/create-tsc',
+    getParentRoute: () => AuthenticatedMasterDataRoute,
+  } as any)
 const AuthenticatedRecordsRecordIdApprovalRoute =
   AuthenticatedRecordsRecordIdApprovalRouteImport.update({
     id: '/$recordId/approval',
@@ -175,6 +189,8 @@ export interface FileRoutesByFullPath {
   '/master-data/': typeof AuthenticatedMasterDataIndexRoute
   '/records/': typeof AuthenticatedRecordsIndexRoute
   '/daily-progress/$id/edit': typeof AuthenticatedDailyProgressIdEditRoute
+  '/master-data/checksheet/create-assembly': typeof AuthenticatedMasterDataChecksheetCreateAssemblyRoute
+  '/master-data/checksheet/create-tsc': typeof AuthenticatedMasterDataChecksheetCreateTscRoute
   '/records/$recordId/approval': typeof AuthenticatedRecordsRecordIdApprovalRoute
 }
 export interface FileRoutesByTo {
@@ -196,6 +212,8 @@ export interface FileRoutesByTo {
   '/master-data': typeof AuthenticatedMasterDataIndexRoute
   '/records': typeof AuthenticatedRecordsIndexRoute
   '/daily-progress/$id/edit': typeof AuthenticatedDailyProgressIdEditRoute
+  '/master-data/checksheet/create-assembly': typeof AuthenticatedMasterDataChecksheetCreateAssemblyRoute
+  '/master-data/checksheet/create-tsc': typeof AuthenticatedMasterDataChecksheetCreateTscRoute
   '/records/$recordId/approval': typeof AuthenticatedRecordsRecordIdApprovalRoute
 }
 export interface FileRoutesById {
@@ -221,6 +239,8 @@ export interface FileRoutesById {
   '/_authenticated/master-data/': typeof AuthenticatedMasterDataIndexRoute
   '/_authenticated/records/': typeof AuthenticatedRecordsIndexRoute
   '/_authenticated/daily-progress_/$id_/edit': typeof AuthenticatedDailyProgressIdEditRoute
+  '/_authenticated/master-data/checksheet_/create-assembly': typeof AuthenticatedMasterDataChecksheetCreateAssemblyRoute
+  '/_authenticated/master-data/checksheet_/create-tsc': typeof AuthenticatedMasterDataChecksheetCreateTscRoute
   '/_authenticated/records/$recordId/approval': typeof AuthenticatedRecordsRecordIdApprovalRoute
 }
 export interface FileRouteTypes {
@@ -246,6 +266,8 @@ export interface FileRouteTypes {
     | '/master-data/'
     | '/records/'
     | '/daily-progress/$id/edit'
+    | '/master-data/checksheet/create-assembly'
+    | '/master-data/checksheet/create-tsc'
     | '/records/$recordId/approval'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -267,6 +289,8 @@ export interface FileRouteTypes {
     | '/master-data'
     | '/records'
     | '/daily-progress/$id/edit'
+    | '/master-data/checksheet/create-assembly'
+    | '/master-data/checksheet/create-tsc'
     | '/records/$recordId/approval'
   id:
     | '__root__'
@@ -291,6 +315,8 @@ export interface FileRouteTypes {
     | '/_authenticated/master-data/'
     | '/_authenticated/records/'
     | '/_authenticated/daily-progress_/$id_/edit'
+    | '/_authenticated/master-data/checksheet_/create-assembly'
+    | '/_authenticated/master-data/checksheet_/create-tsc'
     | '/_authenticated/records/$recordId/approval'
   fileRoutesById: FileRoutesById
 }
@@ -448,6 +474,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDailyProgressIdEditRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/master-data/checksheet_/create-assembly': {
+      id: '/_authenticated/master-data/checksheet_/create-assembly'
+      path: '/checksheet/create-assembly'
+      fullPath: '/master-data/checksheet/create-assembly'
+      preLoaderRoute: typeof AuthenticatedMasterDataChecksheetCreateAssemblyRouteImport
+      parentRoute: typeof AuthenticatedMasterDataRoute
+    }
+    '/_authenticated/master-data/checksheet_/create-tsc': {
+      id: '/_authenticated/master-data/checksheet_/create-tsc'
+      path: '/checksheet/create-tsc'
+      fullPath: '/master-data/checksheet/create-tsc'
+      preLoaderRoute: typeof AuthenticatedMasterDataChecksheetCreateTscRouteImport
+      parentRoute: typeof AuthenticatedMasterDataRoute
+    }
     '/_authenticated/records/$recordId/approval': {
       id: '/_authenticated/records/$recordId/approval'
       path: '/$recordId/approval'
@@ -464,6 +504,8 @@ interface AuthenticatedMasterDataRouteChildren {
   AuthenticatedMasterDataEquipmentRoute: typeof AuthenticatedMasterDataEquipmentRoute
   AuthenticatedMasterDataPartRoute: typeof AuthenticatedMasterDataPartRoute
   AuthenticatedMasterDataIndexRoute: typeof AuthenticatedMasterDataIndexRoute
+  AuthenticatedMasterDataChecksheetCreateAssemblyRoute: typeof AuthenticatedMasterDataChecksheetCreateAssemblyRoute
+  AuthenticatedMasterDataChecksheetCreateTscRoute: typeof AuthenticatedMasterDataChecksheetCreateTscRoute
 }
 
 const AuthenticatedMasterDataRouteChildren: AuthenticatedMasterDataRouteChildren =
@@ -476,6 +518,10 @@ const AuthenticatedMasterDataRouteChildren: AuthenticatedMasterDataRouteChildren
       AuthenticatedMasterDataEquipmentRoute,
     AuthenticatedMasterDataPartRoute: AuthenticatedMasterDataPartRoute,
     AuthenticatedMasterDataIndexRoute: AuthenticatedMasterDataIndexRoute,
+    AuthenticatedMasterDataChecksheetCreateAssemblyRoute:
+      AuthenticatedMasterDataChecksheetCreateAssemblyRoute,
+    AuthenticatedMasterDataChecksheetCreateTscRoute:
+      AuthenticatedMasterDataChecksheetCreateTscRoute,
   }
 
 const AuthenticatedMasterDataRouteWithChildren =

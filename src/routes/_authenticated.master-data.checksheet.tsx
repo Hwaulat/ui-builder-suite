@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Eye, Edit2, Trash2, Plus, Layers, ChevronLeft, ChevronRight, ChevronDown, RotateCw } from "lucide-react";
@@ -19,12 +19,20 @@ const mockData = Array(10).fill({
   autoValveNo: "-",
 });
 
+const mockDataOther = Array(10).fill({
+  partNoName: "00912 - Part Name",
+  version: "V1",
+  lotNo: "S702",
+});
+
 function MasterDataChecksheetPage() {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const totalItems = 40; // Mock total items for display
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const mainContent = (
+  
+  const assemblyContent = (
     <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
       {/* Toolbar */}
       <div className="p-4 flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-transparent">
@@ -39,6 +47,7 @@ function MasterDataChecksheetPage() {
           icon={<Plus className="h-4 w-4" />} 
           label="Add New Checksheet"
           className="w-full sm:w-auto bg-[#2b5a9e] hover:bg-[#22487e] text-white rounded-lg px-6 h-10 shrink-0 font-medium"
+          onClick={() => navigate({ to: "/master-data/checksheet/create-assembly" })}
         />
       </div>
 
@@ -97,6 +106,72 @@ function MasterDataChecksheetPage() {
     </div>
   );
 
+  const renderOtherContent = (type: string) => (
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden flex flex-col">
+      {/* Toolbar */}
+      <div className="p-4 flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-transparent">
+        <div className="w-full flex-1">
+          <Search 
+            placeholder="Search by part no, name & lot no" 
+            className="bg-white"
+          />
+        </div>
+        <Button 
+          variant="primary" 
+          icon={<Plus className="h-4 w-4" />} 
+          label="Add New Checksheet"
+          className="w-full sm:w-auto bg-[#2b5a9e] hover:bg-[#22487e] text-white rounded-lg px-6 h-10 shrink-0 font-medium"
+          onClick={() => navigate({ to: "/master-data/checksheet/create-tsc", search: { type } })}
+        />
+      </div>
+
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <Table className="min-w-full">
+          <TableHeader className="bg-[#f8fafc]">
+            <TableRow className="hover:bg-transparent border-y border-gray-100">
+              <TableHead className="w-[180px] font-semibold text-gray-500 text-xs tracking-wider py-4 pl-6">ACTION</TableHead>
+              <TableHead className="font-semibold text-gray-500 text-xs tracking-wider py-4">
+                <div className="flex items-center gap-1">PART NO - NAME <ChevronDown className="h-3.5 w-3.5 text-blue-500" /></div>
+              </TableHead>
+              <TableHead className="font-semibold text-gray-500 text-xs tracking-wider py-4">
+                <div className="flex items-center gap-1">VERSION <ChevronDown className="h-3.5 w-3.5 text-blue-500" /></div>
+              </TableHead>
+              <TableHead className="font-semibold text-gray-500 text-xs tracking-wider py-4">
+                <div className="flex items-center gap-1">LOT NO. <ChevronDown className="h-3.5 w-3.5 text-blue-500" /></div>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {mockDataOther.map((row, index) => (
+              <TableRow key={index} className="hover:bg-gray-50/50 border-b border-gray-50 last:border-0 transition-colors">
+                <TableCell className="py-3 pl-6">
+                  <div className="flex items-center gap-2">
+                    <Button variant="icon" className="!w-8 !h-8 !p-0 dark:border-slate-700 dark:hover:bg-slate-700" icon={<Eye className="!w-[17px] !h-[17px]" />} />
+                    <Button variant="icon" className="!w-8 !h-8 !p-0 dark:border-slate-700 dark:hover:bg-slate-700" icon={<Edit2 className="!w-[17px] !h-[17px]" />} />
+                    <Button variant="icon" className="!w-8 !h-8 !p-0 dark:border-slate-700 dark:hover:bg-slate-700" icon={<Trash2 className="!w-[17px] !h-[17px]" />} />
+                  </div>
+                </TableCell>
+                <TableCell className="font-medium text-gray-700 text-sm py-3">{row.partNoName}</TableCell>
+                <TableCell className="text-gray-500 text-sm py-3">{row.version}</TableCell>
+                <TableCell className="text-gray-500 text-sm py-3">{row.lotNo}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      <PaginationDefault 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        rowsPerPage={itemsPerPage}
+        totalItems={totalItems}
+        onPageChange={setCurrentPage}
+        onRowsPerPageChange={(val) => { setItemsPerPage(val); setCurrentPage(1); }}
+      />
+    </div>
+  );
+
   return (
     <div className="flex-1 space-y-4 bg-[#f8fafc] p-6 h-full min-h-screen">
       <Tabs 
@@ -108,10 +183,10 @@ function MasterDataChecksheetPage() {
           </div>
         }
         items={[
-          { value: "assembly", label: "Assembly/Finishing", content: mainContent },
-          { value: "tsc", label: "TSC Extruder", content: mainContent },
-          { value: "v3", label: "V3", content: mainContent },
-          { value: "v4", label: "V4", content: mainContent },
+          { value: "assembly", label: "Assembly/Finishing", content: assemblyContent },
+          { value: "tsc", label: "TSC Extruder", content: renderOtherContent("tsc") },
+          { value: "v3", label: "V3", content: renderOtherContent("v3") },
+          { value: "v4", label: "V4", content: renderOtherContent("v4") },
         ]}
       />
     </div>

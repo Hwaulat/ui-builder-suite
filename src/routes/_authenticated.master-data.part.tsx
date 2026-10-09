@@ -212,8 +212,8 @@ function MasterDataPartPage() {
                       />
                       <Button 
                         variant="icon" 
-                        className="!w-8 !h-8 !p-0 dark:border-slate-700 dark:hover:bg-slate-700 hover:text-red-600 dark:hover:text-red-500" 
-                        icon={<Trash2 className="!w-[17px] !h-[17px] text-red-500" />} 
+                        className="!w-8 !h-8 !p-0 dark:border-slate-700 dark:hover:bg-slate-700" 
+                        icon={<Trash2 className="!w-[17px] !h-[17px]" />} 
                         onClick={() => handleDelete(row.id)}
                       />
                     </div>
